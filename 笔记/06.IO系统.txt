@@ -1,0 +1,85 @@
+I/O输入输出：
+
+Java中的流：字节流和字符流。
+字节流(ByteStream)为处理字节的输入和输出。(以字节为处理单位)
+字符流(CharacterStream)为处理字符的输入和输出。(以字符为处理单位)
+在最底层，所有的输入/输出都是字节形式的。
+处理字节流的两个基本类：InputStream和OutputStream。
+处理字符流的两个基本类：Reader和Writer。
+
+FileOutputStream ----> 执行最慢
+BufferedOutputStream
+FileWriter ----> 执行最快
+
+字节流：
+File：
+                String dirname="D:\\JavaExamples";
+		File f=new File(dirname);
+		if(f.isDirectory()){//测试此抽象路径名表示的文件是否是一个目录。
+		    System.out.println(dirname+"的目录为:");
+			String[] s=f.list();  //返回一个字符串数组，这些字符串指定此抽象路径名表示的目录中的文件和目录。
+			for(int i=0;i<s.length;i++){
+			   File f1=new File(dirname+"\\"+s[i]);
+			   if(f1.isDirectory()){
+			        System.out.println(s[i]+"是一个目录");
+			   }else{
+			        System.out.println(s[i]+"是一个文件");
+			   }
+			}
+		}else{
+		    System.out.println(dirname+"不是一个目录");
+		}
+
+FileInputStream：
+           try{
+	                //FileInputStream fis=new FileInputStream("D:\\a.txt");  //等价于下面两条语句
+			File f=new File("D:\\a.txt");
+                        FileInputStream fis=new FileInputStream(f);
+			int a;
+	                /*do{
+				a=fis.read();
+				if(a!=-1){
+				    System.out.println((char)a);
+				}
+			}while(a!=-1);*/
+
+			while((a=fis.read())!=-1){
+		        System.out.println((char)a);
+		    }
+			fis.close();
+	   }catch(Exception e){
+	       System.out.println(e.getMessage());
+	   }
+
+FileOutputStream：
+                String s="would you like to give me a cup of water";
+		byte[] b=s.getBytes();
+		try{
+		    //FileOutputStream fos=new FileOutputStream("D:\\b.txt");//若果此文件不存在，将会创建此文件，再写入
+		    FileOutputStream fos=new FileOutputStream("D:\\b.txt",true);//第二个参数为 true，表示将字节写入文件末尾处，而不是写入文件开始处。
+			fos.write(b);
+		    fos.close();
+	        }catch(Exception e){
+		    System.out.println(e.toString());
+		}
+
+字符流：
+BufferedReader 和BufferedWriter
+带有缓冲区的输入和输出，可以提高程序的性能。
+                BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	        BufferedWriter bw=new BufferedWriter(new FileWriter("D:\\c.txt"));
+		String s;
+		while(true){
+		   System.out.print("请输入：");
+		   System.out.flush();  // 刷新该流的缓冲
+		   s=br.readLine();
+		   if(s.length()==0){
+		      break;
+		   }
+		   bw.write(s);
+		   bw.newLine();  //写入一个行分隔符
+		}
+		bw.close();
+
+FileReader和FileWriter
+

@@ -1,0 +1,44 @@
+1.枚举
+public enum Constant {
+	IBATIS_INSERT("insert"),
+	IBATIS_UPDATE("update"),
+	IBATIS_COUNT("count"),
+	IBATIS_GET_BY_KEY("get"),
+	IBATIS_DELETE_ID("deleteById"),
+	IBATIS_DELETE("delete"),
+	IBATIS_SEARCH_ALL("searchAll"),
+	IBATIS_LIST("list");
+}
+
+
+2.接口
+public interface Const {
+	/** 用于保存当前登录用户 */
+	String USER_SESSION_ID = "LOGIN_USER";
+	/** systemAdmin不受任何权限限制 */
+	String SYSTEM_ADMIN_ID = "systemAdmin";
+}
+
+3.类
+public class Constants {
+	/**
+	 * 首页模板
+	 */
+	public static final String TPLDIR_INDEX = "index";
+	
+        /**
+	 * 页面禁止访问
+	 */
+	public static final String ERROR_403 = "error/403";
+	
+	/**
+	 * 备份路径
+	 */
+	public static final String BACKUP_PATH = "/backup";
+	
+	/**
+	 * 文件路径分隔符
+	 */
+	public static final String FILE_SEPARATOR = System.getProperty("file.separator");
+}
+

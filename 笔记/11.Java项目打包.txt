@@ -1,0 +1,103 @@
+jar -cvfe t.jar Test *.class  //将所有的class文件打包到他t包中，Test为入口类
+jar -cvfe t.jar Test .  //将该目录下所有文件打包
+jar -cvfm t.jar a.txt *.class
+
+
+D:\bank\src>javac -d ../classes *.java
+D:\bank\src>jar -cvfe bank.jar Login *.java
+
+编译： D:\bank\src>javac -d ../classes *.java
+运行： D:\bank\classes>java com.ui.Login 或 D:\beta\classes>java com/ui/Login
+打包： D:\beta\classes>jar cvfe ../bank.jar com.ui.Login com/tools/*.class com/ui/*.class com/
+dao/*.class
+把文本文件打入jar包：D:\beta>jar cvfm h.jar m.txt
+运行jar文件：  D:\bankmyth1>java -jar bankmyth1.jar
+
+
+
+
+老师讲的：
+系统环境变量
+java_home = e:\jdk
+classpath = .;e:\jdk\lib
+path      = .;e:\jdk\bin;e:\jdk\lib;
+
+
+C:\aaa>java com.H
+
+jar
+
+jar -cvfe t.jar Test *.java
+java -jar t.jar
+
+//在aaa目录中随便建立一个m.txt文件，然后执行如下命令进行打包。
+C:\aaa>jar cvfm h.jar m.txt .
+标明清单(manifest)
+增加：abc/(读入= 0) (写出= 0)(存储了 0%)
+增加：abc/D.class(读入= 412) (写出= 289)(压缩了 29%)
+增加：com/(读入= 0) (写出= 0)(存储了 0%)
+增加：com/H.class(读入= 412) (写出= 288)(压缩了 30%)
+增加：m.txt(读入= 0) (写出= 0)(存储了 0%)
+
+//打包后，用Editplus软件打开包中的manifest.mf文件在第三行加入Main-Class: com.H即可。
+C:\aaa>java -jar h.jar
+Hello World!
+
+1.将java文件进行编译
+c:\test\src>javac -d ../classes *.java
+
+作用是将当前目录src下所有的java文件编译到上级目录中的classes目录下，
+并直接创建包
+
+C:\>javac -d c:\test\classes c:\test\src\*.java
+
+
+2.直接进入classes目录下,建立一个文本文件命名为m.txt，
+  内容如下：main-class: com.hw.util.Util
+  还要有第二行空行
+然后在classes目录执行如下命令,将项目打到c:盘下项目为t.jar
+F:\classes>jar -cmf m.txt c:\t.jar *.*
+
+3.运行项目
+c:\>java -jar t.jar
+
+
+4.编写一个批处理程序
+
+bank.bat
+
+@echo off
+title 某某柜员机系统
+color 4e
+cls
+echo -----------------------
+echo --  某某柜员机系统   --
+echo -----------------------
+java -jar t.jar
+pause
+
+
+ok.bat
+
+javac -d c:\test\classes c:\test\src\*.java
+cd c:\test\classes
+jar -cmf m.txt c:\t.jar *.*
+copy c:\t.jar "c:\Documents and Settings\Administrator\桌面\"
+pause
+
+
+-------------------------------------------------------------------
+批量编译: javac *.java
+
+1.先加个包 package com; 先手动建一个com文件夹；
+  编译:javac -d Test.java  
+  执行：java com.Test
+
+2.javadoc:生成文档
+必须先有公开类，有注释文档
+javadoc -d test Test.java
+
+3.打包命令:jar 
+  先编译:javac Test.java
+  执行:jar cvf t.jar Test.class
+  运行:java -jar t.jar

@@ -1,0 +1,17 @@
+		try {
+			File file = new File("E:\\a\\1.gif");
+			FileInputStream in = new FileInputStream(file);
+			byte[] b = new byte[Integer.parseInt(String.valueOf((file.length())))];
+			in.read(b);
+			
+			FileOutputStream out = new FileOutputStream("E:\\a\\1.1.gif");
+			out.write(b);
+			
+			in.close();
+			out.flush();
+			out.close();
+			
+			System.out.println("success!!");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}

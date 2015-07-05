@@ -1,0 +1,93 @@
+----------------------------- 连接SQL Server数据库 -------------------------------
+public class DBConn {
+	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";  //驱动
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=student";  //协议
+	String uid = "yue";
+	String pwd = "";
+	Connection conn = null;
+
+	public Connection getConn() {
+		if (this.conn == null) {
+			try {
+				Class.forName(driver);  //载入驱动程序
+				this.conn = DriverManager.getConnection(url, uid, pwd); //建立连接
+			} catch (Exception e) {
+				System.out.println("连接SQL Server2005失败，请检查");
+			}
+		}
+		return this.conn;
+	}
+}
+
+----------------------------- 连接MySql数据库 -------------------------------
+public class DBConn {
+	// 驱动
+	String driver = "com.mysql.jdbc.Driver"; 
+	// 协议
+	String url = "jdbc:mysql://localhost:3306/databaseName?useUnicode=true&characterEncoding=gbk"; 
+	// 用户名
+	String uid = "root";
+	// 密码
+	String pwd = "";
+	Connection conn = null;
+
+	public Connection getConn() {
+		if (this.conn == null) {
+			try {
+				// 载入驱动程序
+				Class.forName(driver); 
+				// 建立连接
+				this.conn = DriverManager.getConnection(url, uid, pwd); 
+			} catch (Exception e) {
+				System.out.println("连接MySql失败，请检查");
+			}
+		}
+		return this.conn;
+	}
+}
+
+public class DbConn {
+	// 驱动
+	public static String driver = "com.mysql.jdbc.Driver";
+	// 协议
+	public static String url = "jdbc:mysql://localhost:3306/databaseName?useUnicode=true&characterEncoding=gbk";
+	// 用户名
+	public static String uid = "root";
+	// 密码
+	public static String pwd = "";
+
+	public static Connection getConn() {
+		Connection conn = null;
+		try {
+			// 载入驱动程序
+			Class.forName(driver);
+			// 建立连接
+			conn = DriverManager.getConnection(url, uid, pwd);
+		} catch (Exception e) {
+			System.out.println("连接MySql失败，请检查");
+		}
+		return conn;
+	}
+}
+
+
+----------------------------- 连接Oracle数据库 -------------------------------
+public class DBConn {
+	String driver ="oracle.jdbc.driver.OracleDriver";
+        String url ="jdbc:oracle:thin:@localhost:1521:ORCL";
+        String uid ="system";
+        String pwd ="orcl";
+	Connection conn = null;
+
+	public Connection getConn() {
+		if (this.conn == null) {
+			try {
+				Class.forName(driver);  //载入驱动程序
+				this.conn = DriverManager.getConnection(url, uid, pwd); //建立连接
+			} catch (Exception e) {
+				System.out.println("连接SQL Server2005失败，请检查");
+			}
+		}
+		return this.conn;
+	}
+}

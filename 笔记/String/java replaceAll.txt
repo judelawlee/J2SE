@@ -1,0 +1,5 @@
+
+String a = "[dfsadfsd]";
+
+System.out.println(a.replaceAll("\\u005B", ""));
+System.out.println(a.replaceAll("\\[", ""));

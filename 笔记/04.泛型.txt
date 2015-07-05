@@ -1,0 +1,70 @@
+泛型  
+
+从 Java SE 1.5(5.0) 之后有了泛型。
+Java的泛型就是创建一个用类型作为参数的类。
+使用泛型的好处:在编译时检查类型安全，并且所有的强制转换都是自动和隐式的，提高代码的重用率。
+泛型可以不要构造方法
+泛型变量不能使用静态，私有和全局都可以。
+简单类型不能使用，只能使用类（或接口）。
+系统的个别容器类本省就有泛型的功能。
+
+泛型是Java SE 1.5的新特性，泛型的本质是参数化类型，
+也就是说所操作的数据类型被指定为一个参数。这种参数类型可以用在类、
+接口和方法的创建中，分别称为泛型类、泛型接口、泛型方法。 
+Java语言引入泛型的好处是安全简单。
+
+public class T1 {
+
+	public static void main(String[] args) {
+		test1(180);
+		test1("hello");
+		
+		System.out.println(test2("hi"));
+	}
+
+	public static <T> void test1(T a) {
+		System.out.println(a);
+	}
+	
+	public static <T> T test2(T a) {
+		return a;
+	}
+
+}
+
+public class Gen<T> {
+	private T ob;
+	public Gen(T ob){
+	    this.ob = ob;
+	}
+	public T getOb(){
+	    return ob;
+	}
+	public void setOb(T ob){
+	    this.ob = ob;
+	}
+	public void showType(){
+	    System.out.println(ob.getClass().getName());
+	}
+}
+
+//使用泛型
+	   Gen<Integer> a=new Gen<Integer>(1);
+	   System.out.println(a.getOb());  // 1
+	   a.showType();  // java.lang.Integer
+
+       //使用泛型
+	   Gen<Integer> a=new Gen<Integer>(1);
+	   System.out.println(a.getOb());  // 1
+	   a.showType();  // java.lang.Integer
+
+       //没使用泛型
+	   //Gen b=new Gen();  //错误
+	   //下面这种用法也可以，但会出一个警告
+	   Gen b=new Gen(new String("hello")); 
+	   System.out.println(b.getOb());  //hello
+       b.showType();  //java.lang.String
+       Gen c=new Gen(1);
+	   System.out.println(c.getOb());  //1
+       c.showType();  // java.lang.Integer
+

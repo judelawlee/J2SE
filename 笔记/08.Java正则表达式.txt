@@ -1,0 +1,14 @@
+Pattern：
+典型的调用顺序是 
+ Pattern p = Pattern.compile("a*b");
+ Matcher m = p.matcher("aaaaab");
+ boolean b = m.matches();
+或：
+boolean b = Pattern.matches("a*b", "aaaaab");
+
+Matcher：
+  matches方法 尝试将整个输入序列与该模式匹配。 
+  lookingAt 方法 尝试将输入序列从头开始与该模式匹配。 
+  find 方法 扫描输入序列以查找与该模式匹配的下一个子序列。
+
+String的indexOf()方法不支持正则表达式。

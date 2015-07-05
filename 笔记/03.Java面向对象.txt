@@ -1,0 +1,323 @@
+Object类是所有类的父类（包括自定义类）。
+---------------------------------------------------------------------------------------------------
+对象的比较：
+String s1=new String("abc");
+String s2=new String("abc");
+String s3=s1;
+System.out.println(s1==s2);  //结果为false,"= ="号用在两个对象之间的话，比较的是两个对象的地址
+System.out.println(s1==s3);  //结果为true,两个对象公用一个地址
+System.out.println(s1.equals(s2));  //结果为true，equals()方法比较的是内容
+---------------------------------------------------------------------------------------------------   
+构造方法：（与类名相同）
+	如果不定义构造方法，编译器在编译时会自动加一个无参数的构造方法；如果自己定义了构造方法（不论有参无参），
+   编译器都不会再增加构造方法。
+
+   构造方法一般为公有的或有好的（不加任何修饰符）。
+
+   构造方法没有返回值，不能使用return语句；不能加void。
+---------------------------------------------------------------------------------------------------
+this：
+   当一个类中属性名和方法中参数名相同时，加上this加以区分。
+   增加程序的可读性。
+---------------------------------------------------------------------------------------------------
+常量：（final）
+   定义常量，变量名的所有字母一律大写。
+   如果用在变量前，变量不能赋值，只能在声明的时候赋值。
+   如果用在方法前面，此方法不能重载，也不能被继承。
+---------------------------------------------------------------------------------------------------
+垃圾回收：finalize()；（类似于C++和C#中的析构函数）；
+强制执行垃圾回收：System.gc();
+   Java没有析构方法。
+---------------------------------------------------------------------------------------------------
+类的继承：extends —— 实现了代码的可重用性。
+  A a = new B();  // B继承A 或 B实现了A的接口
+  C c = new A();  // A继承B,B又继承C,正确的
+
+Java只支持单继承，子类只能有一个父类，但父类又可以继承自其他类。
+
+Java和C#都是但继承的(父类只能有一个)，C++是多继承的。
+
+Java程序先执行静态代码段，后执行main方法。
+
+子类对象可自动转换成父类，父类转换成子类必须使用强制转换。
+
+super（）：调用父类的构造方法，必须放在子类方法中的第一行。
+
+覆盖（重写）：在子类中重新定义的方法与父类的方法(返回类型、参数、方法名)完全一致。覆盖方法时，
+	      不能使用比父类中被覆盖的方法更严格的访问权限。
+
+覆盖(override)和重载(overload)都是多态的表现形式。
+
+代码1：
+class A {
+	int x;
+	void showStr(){
+		x=1;
+	    System.out.println("A的showStr方法,x="+x);
+	}
+}
+class B extends A {
+	int x; //隐藏了父类A中的变量x
+	void showStr(){  //重写(覆盖)了父类A中的方法
+		x=2;
+	    System.out.println("B的showStr方法,x="+x);
+	}
+}
+class Extends {
+	public static void main(String[] args){
+	    A a=new A();
+	    a.showStr();  //x=1
+		//B b=new A();  //错误的
+	    B b=new B();  // A b=new B();这样写也是正确的，效果一样
+		b.showStr();  //x=2
+	}   
+}
+
+代码2：
+class A {
+	int x;
+	A(){
+	   x=1;
+	   System.out.println("A的构造方法,x="+x);
+	}
+	void showStr(){
+		x=2;
+	    System.out.println("A的showStr方法,x="+x);
+	}
+}
+class B extends A {
+	int x; 
+	B(){
+	   super();  //调用父类A中的构造方法，super必须放在第一句
+	   x=3;
+	   System.out.println("B的构造方法,x="+x);
+	}
+	void showStr(){  
+		super.showStr();//调用父类A中的showStr方法
+		x=4;
+	    System.out.println("B的showStr方法,super.x="+super.x+",B.x="+x);
+	}
+}
+class Extends {
+	public static void main(String[] args){
+	    B b=new B(); 
+		System.out.println("");
+		b.showStr();  
+	}   
+}
+运行结果：
+A的构造方法,x=1
+B的构造方法,x=3
+A的showStr方法,x=2
+B的showStr方法,super.x=2,B.x=4
+
+代码3：
+class C1 {
+    public int age = 10;
+	static{
+	    System.out.println("C静态代码块");
+	}
+	public C1(){
+	    System.out.println("C构造方法");
+	}
+}
+class B1 extends C1{
+	public int age = 20;
+	static{
+	    System.out.println("B静态代码块");
+	}
+	public B1(){
+	    System.out.println("B构造方法");
+	}
+}
+class A1 extends B1 {
+	public int age = 30;
+	static{
+	    System.out.println("A静态代码块");
+	}
+	public A1(){
+		super();
+	    System.out.println("A构造方法,A.age="+this.age);
+	    System.out.println("A构造方法,super.age="+super.age);
+	}
+    public static void main(String[] args) {
+		new A1();
+    }
+}
+运行结果：
+C静态代码块
+B静态代码块
+A静态代码块
+C构造方法
+B构造方法
+A构造方法,A.age=30
+A构造方法,super.age=20
+
+class A {
+	public static int i=10;
+	public int j=10;
+	public static void showStr(){
+	   System.out.println("父类A中的show方法");
+	}
+	public void say(){
+	   System.out.println("父类A中的say方法");
+	}
+}
+class B extends A {
+	public static int i=20;
+	public int j=20;
+	public static void showStr(){
+	   //super.showStr();   // 无法从静态上下文中引用非静态 变量 super
+	   System.out.println("子类B中的show方法");
+	   //System.out.println(super.i+"  "+super.j);  // 无法从静态上下文中引用非静态 变量 super
+	}
+	public void say(){
+	   super.say();
+	   System.out.println("子类B中的say方法");
+	   System.out.println(super.i+"  "+super.j);
+	}
+}
+public class  Jicheng{
+	public static void main(String[] args) {
+		A a=new B();
+		System.out.println(a.i); //10
+		System.out.println(a.j); //10
+		a.showStr();  //父类A中的show方法
+		a.say();  //父类A中的say方法,子类B中的say方法  10  10
+		System.out.println("--------------------------------------------");
+        B b=new B();  
+		System.out.println(b.i);  //20
+		System.out.println(b.j);  //20
+		b.showStr();  //子类B中的show方法
+		b.say();  //父类A中的say方法,子类B中的say方法 10  10
+	}
+}
+---------------------------------------------------------------------------------------------------
+intanceof操作符：
+判断一个类是否实现了某个接口；
+判断一个实例对象是否属于一个类。
+
+interface A {}
+class B implements A{}
+main{
+	B b=new B();
+	System.out.println(b instanceof B);  //true,判断对象b是否是B类的实例
+	System.out.println(b instanceof A);  //true,判断b是否实现了A接口
+}
+---------------------------------------------------------------------------------------------------	
+修饰符：public、private、默认、protected。
+---------------------------------------------------------------------------------------------------
+static：
+静态变量：在内存中地址只有一份。
+静态方法：不用通过类的实例，通过类可直接访问。
+---------------------------------------------------------------------------------------------------
+内部类（嵌套类、内置类）：（不推荐使用）
+在一个类的内部定义的类。
+外部类可以直接调用内部类。
+
+编译后产生了形如A$B.class的文件，则A是外部类，B是内部类。
+
+public class Outer {
+    public static void main(String[] args) {
+        System.out.println(Inner.getNum());
+		
+        Inner1 a=new Inner1();
+		System.out.println(a.getNum());
+
+		Outer outter=new Outer();
+	    Outer.Inner2 b=outter.new Inner2();
+		System.out.println(b.getNum());
+    }
+
+    static class Inner {//静态内部类、静态方法
+        static int getNum(){
+            System.out.println(Outer.getStr());
+		    return 20;
+		}    
+    } 
+    
+	static class Inner1 {//静态内部类、非静态方法
+	    int getNum(){
+		    return 30;
+		}
+	}
+	class Inner2 {//非静态内部类、非静态方法
+	    int getNum(){
+		    return 40;
+		}
+	}
+	public static String getStr(){//外部类的静态方法
+	    return "out";
+	}	
+	public static void myInner(){//外部类的静态方法	    
+		class Abc {//内部类
+	    }
+	}
+}
+---------------------------------------------------------------------------------------------------
+抽象类和抽象方法：abstract
+抽象类不能被直接实例化。
+抽象类中可以定义变量，抽象类中也可以定义常量。
+抽象类中可以有抽象方法，也可以有普通方法；抽象类不一定要包含抽象方法，类中全是普通方法，也可以定义为抽象类；但如果类中包含了抽象方法，则该类必须被定义为抽象类。如果一个类中全部是抽象方法，则该类可以被定义为抽象类，也可以被定义为接口。
+抽象方法只需声明，无需实现，也不能被实现，抽象方法不能有主体。
+抽象类必须被继承，抽象方法必须被重写。子类应该实现父类的抽象方法，如果没有实现，则子类也必须定义为抽象类。
+抽象类和抽象方法默认为public。
+
+abstract class A {  //定义抽象类
+	int i;  //抽象类中可以定义变量
+	final int j=0;   //抽象类中也可以定义常量
+    abstract void callMe(); //抽象方法， 抽象方法不能有主体
+	  
+	void me(){
+	    System.out.println("在抽象类A中的me成员函数");
+	}
+}
+
+class B extends A {
+	void callMe(){  //重写方法
+	    System.out.println("在B中的callMe成员函数");
+	}
+}
+
+public class Abstract {
+    public static void main(String[] args){
+	   //A a=new A();  //错误，抽象类不能直接被实例化。
+	   A a=new B();
+	   a.me();
+	   a.callMe();
+	   a.i=10;
+	   System.out.println(a.i);
+	   System.out.println(a.j);
+	}    
+}
+---------------------------------------------------------------------------------------------------
+接口和抽象方法的修饰符默认都为public。
+接口：interface(定制编程规范)
+接口中全部是常量（一般都是静态的）和抽象方法（借口中的抽象方法，可以用abstract关键字，也可以不用），默认都是public。（接口是抽象方法和常量值的集合）
+接口是一种特殊的抽象类，这种类只包含常量和方法的定义。
+实现接口时，要全部重写抽象方法，如果个别没有重写，则实现接口的类要定义为抽象类。
+一个类可以实现很多接口。（单继承，多实现）例：
+public class A extends B implements C,D,E{}
+public abstrace class A extends B implements C,D,E{}
+
+interface A {
+	//int i=10;   //原则上，接口中是不能有变量的，但是如果给变量赋值的话，是允许的  
+	final int num = 100;
+	void a();  //abstract void a();
+	void b();
+	void c();
+	void d();
+}
+abstract class B implements A {
+	public void a(){}
+	public void b(){}
+}
+class C extends B implements A {
+	public void c(){}
+	public void d(){}
+}
+class Interface{
+	public static void main(String[] args){
+	   System.out.println("Hello");
+	}
+}

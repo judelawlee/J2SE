@@ -1,0 +1,191 @@
+数据转换：
+    short a=0; 
+    a=a+1; //这是有错的，因为1是int型的
+    a+=1;  
+
+基本数据类型(原始型数据类型):byte short int long float double boolean char  8种；
+整型有:short、int、long;
+原始型数据类型和引用型数据类型的缺省值不同。
+
+char可以存储一个汉字，如:
+    char c = '国';
+    System.out.println(c);
+------------------------------------------------------------------------------------
+if-else语句：
+    if(i%2!=0){
+        System.out.println(i+"不能被2整除");
+    }else{
+        System.out.println(i+"能被2整除");
+    }
+------------------------------------------------------------------------------------
+switch语句：
+     for(int i=0;i<10;i++){
+       switch(i){
+            case 0: System.out.println("0"); break;
+            case 1: System.out.println("1"); break;
+            case 2: System.out.println("2"); break;
+            case 3: System.out.println("3"); break;
+            case 4: System.out.println("4"); break;
+            default: System.out.println("5.....");
+       }
+     }
+------------------------------------------------------------------------------------
+while语句：
+    int i=10;
+    while(i>0){
+	System.out.println("Hello"+i);
+	i--; 
+    }
+注：在Java里while(1){}不是死循环，会出错，因为Java不能识别1为true。
+------------------------------------------------------------------------------------
+do-while语句：
+   int n=10;
+   do{
+   	System.out.println("Hello"+n);
+   	n--;
+   }while(n>0);
+------------------------------------------------------------------------------------
+for语句：
+   for(int i=1;i<10;i++){
+      System.out.println(i);
+   }
+注：for( ; ; ){…}
+------------------------------------------------------------------------------------
+foreach语句：
+   int[] nums={1,2,3,4,5,6,7,8,9};
+   for(int x : nums){
+      System.out.println("Hello"+x);
+   }
+------------------------------------------------------------------------------------
+continue结束本次循环，条件允许，开始下次循环
+break终止循环
+------------------------------------------------------------------------------------
+控制台中三种常用的输入方法：
+1.
+import java.util.Scanner;
+
+System.out.print("请输入一个数：");
+Scanner sc=new Scanner(System.in);
+System.out.println("你输入的数字为："+sc.nextLine());
+
+2.
+import java.io.*;
+
+try{
+    BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+    System.out.print("请输入你的姓名：");
+    String str=br.readLine();
+    System.out.println("欢迎"+str);
+}catch(Exception e){
+}
+
+3.此种方法比较安全，建议使用这种方法。
+import java.io.*;
+
+Console c=System.console();
+String uname=new String(c.readLine("请输入你的用户名："));
+String upwd=new String(c.readPassword("请输入你的密码："));
+System.out.println("欢迎"+uname+"\n你的密码是:"+upwd);
+------------------------------------------------------------------------------------
+生成随机数：Random（）,需导入import java.util.*;
+//生成从a到b的随机数：
+Random r=new Random();  
+int a=r.nextInt(b-a+1)+a;
+------------------------------------------------------------------------------------
+数组：
+int[] a=new int[10];
+int[] a=new int[]{1,2,3,4,5,6,7,8,9};
+int[] a={1,2,3,4,5,6,7,8,8};
+
+求数组的大小：a.length,length是属性；但是在求字符串String的长度的时候，
+              length是一个方法，要这样使用：str.length()。
+
+调用：a[i];
+
+java中数组的下标从零开始，List集合的下标也是从零开始。
+------------------------------------------------------------------------------------
+多维数组：
+注：在java中，数组空间不是连续分配的，所以不要求二维数组的每一维的大小相同。
+int[][] a=new int[3][3];
+int[][] a={{1,2,3},{4,5,6},{7,8,9}};
+
+调用：a[i][j]。
+
+数组的遍历：
+一维数组的遍历：见上面的foreach语句。
+二维数组的遍历：
+int[][] num = {{1,2,3},{4,5,6},{7,8,9}};
+for(int m=0;m<num.length;m++){
+    for(int n=0;n<num[m].length;n++){
+        System.out.print(num[m][n]+"\t");
+    }
+}
+
+不管一维还是二维，在使用前（赋值、访问）必须初始化，可以用new默认初始化，也可以用数组常量初始化。
+------------------------------------------------------------------------------------
+递归：（方法内部调用自己）
+求阶乘：
+	public static int getJieCheng(int num){
+	     if(num<=1){
+		    return 1;
+	     }else{
+		    return getJieCheng(num-1)*num;
+	     }
+	}
+
+输出菲波纳西数列：
+       public static long f(int n){
+		if(n==1||n==2){
+			return 1;
+		}else{
+			return f(n-1)+f(n-2);
+		}
+       }
+------------------------------------------------------------------------------------
+异常：
+异常语句的几种形式：
+1.try{…}catch(Exception e){…}
+
+2.try{…}catch(Exception e){…}finally{…}
+注：使用finally时，不论程序有无异常发生，最终都会执行finally语句。
+
+3.
+try{
+    …
+}catch(异常类1  e1){
+    …
+}catch(异常类2  e2){
+    …
+}
+[……]
+catch(Exception e){
+    …
+}finally{…}
+注：使用此种形式的语句时，Exception必须放在最后，因为Exception类是所有异常类的父类。
+
+4.try{…} finally{…}
+
+异常语句中的关键字：try、catch、finally、throw、throws。
+
+自定义异常的格式：
+public class MyException extends Exception{
+   ……
+}
+
+throws一般用在方法后面，提示调用者此方法可能抛出异常，必须捕捉异常:
+public void show(String ss) throws ArithmeticException,ArrayIndexOutOfBoundsException{
+   ……
+}
+
+调用时：
+try{
+    show(s);
+}catch(ArithmeticException ae){
+    ……
+}catch(ArrayIndexOutOfBoundsException e){
+    ……
+}catch(Exception ee){
+    ……
+}finally{
+    ……
+}

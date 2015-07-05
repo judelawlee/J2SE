@@ -1,0 +1,106 @@
+JDBC 应用程序常用接口：
+1) java.sql.DriverManager: 管理一组JDBC 驱动程序的基本服务；
+2) java.sql.Connection: 与特定数据库的连接（会话）；
+3) java.sql.Statement: 用于执行静态 SQL 语句并返回它所生成结果的对象；
+4) java.sql.PreparedStatement: 表示预编译的 SQL 语句的对象；
+5) java.sql.CallableStatement: 用于执行 SQL 存储过程的接口；
+6) java.sql.ResultSet: 表示数据库结果集的数据表。
+
+建立一个数据库连接分为两步：载入驱动程序和建立连接。
+1.载入驱动程序：
+  一般形式：Class.forName(“驱动程序名称”)；
+  例：Class.forName(“sun.jdbc.odbc.JdbcOdbcDriver”);
+2.建立连接：
+  一般形式：Connection con= DriverManager getConnection(url,”用户名”,”密码”)；
+ url由三部分组成：
+   jdbc:<子协议>:<子名称>
+例：Connection con=DriverManager.getConnection(“jdbc:odbc:<数据库名>”,”admin”,”123”);
+3.关闭连接：
+  一般形式:连接变量.close();
+
+向数据库发送SQL语句：
+Statement接口用于将SQL语句发送到数据库。
+1.创建Statement对象：
+   Statement <对象名> =con.createStatement();
+2.使用Statement对象执行语句：
+  (1)executeQuery 方法   用于执行单个结果集的语句，如Select。
+  (2)executeUpdate 方法   用于执行insert、update、delete语句。executeUpdate的返回值是一个整数，用于表示受影响的行数。
+  (3)execute方法  用于执行返回多个结果集、多个更新计数或二者组合的语句。
+
+数据结果集：
+ResultSet接口用于获取执行SQL语句返回的结果。
+1)first()：使记录指针指向第一行。
+2)next()：使记录指针下移一行。
+3)previous()：使记录指针上移一行。
+4)last()：使记录指针指向最后一行。
+5)getXX() ：用于获取结果集中指定列的值。
+
+与MySql数据库建立连接：
+                String driver = "com.mysql.jdbc.Driver";
+		// String url = "jdbc:mysql://localhost:3306/mysql?useUnicode=true&amp;characterEncoding=gb2312";
+		String url = "jdbc:mysql://localhost:3306/student?useUnicode=true&characterEncoding=gbk";
+		//String url = "jdbc:mysql://localhost:3306/student";
+		String uid = "root";
+		String pwd = "";
+
+		try {
+			// 装载驱动
+			Class.forName(driver);
+			// 建立数据库连接
+			Connection conn = DriverManager.getConnection(url, uid, pwd);
+			...................
+			conn.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+与SQL Server数据库建立连接：
+public class DBConn {
+	String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";  //驱动
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=student";  //协议
+	String uid = "yue";
+	String pwd = "";
+	Connection conn = null;
+
+	public Connection getConn() {
+		if (this.conn == null) {
+			try {
+				Class.forName(driver);  //载入驱动程序
+				this.conn = DriverManager.getConnection(url, uid, pwd); //建立连接
+			} catch (Exception e) {
+				System.out.println("连接SQL Server2005失败，请检查");
+			}
+		}
+		return this.conn;
+	}
+}
+
+与Oracle数据库建立连接：
+public class DBConn {
+	String driver ="oracle.jdbc.driver.OracleDriver";
+        String url ="jdbc:oracle:thin:@localhost:1521:ORCL";
+        String uid ="system";
+        String pwd ="orcl";
+	Connection conn = null;
+
+	public Connection getConn() {
+		if (this.conn == null) {
+			try {
+				Class.forName(driver);  //载入驱动程序
+				this.conn = DriverManager.getConnection(url, uid, pwd); //建立连接
+			} catch (Exception e) {
+				System.out.println("连接SQL Server2005失败，请检查");
+			}
+		}
+		return this.conn;
+	}
+}
+
+DBConn db = new DBConn();
+db.getConn();  //与数据库建立连接
+db.getConn().createStatement().execute("select * from stuInfo"));    //查询
+db.getConn().createStatement().executeUpdate("delete from stuInfo ");        //删除
+db.getConn().createStatement().executeUpdate("insert into stuInfo values('001','张三','男') ");    //插入
+db.getConn().createStatement().executeUpdate("update stuInfo set sex='男' where stuNo='002' ");    //修改
+db.getConn().close();  
+
+  

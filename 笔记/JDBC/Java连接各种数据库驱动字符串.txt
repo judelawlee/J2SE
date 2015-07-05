@@ -1,0 +1,11 @@
+MySQL:
+    >driver:"com.mysql.jdbc.Driver"
+    >url:"jdbc:mysql://localhost:3306/dbname[?useUnicode=true&characterEncoding=gbk]"
+--------------------------------------------------------------------
+SQL Server:
+    >driver:"com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    >url:"jdbc:sqlserver://localhost:1433;databaseName=student"
+--------------------------------------------------------------------
+Oracle:
+    >driver:"oracle.jdbc.driver.OracleDriver"
+    >url:"jdbc:oracle:thin:@localhost:1521:ORCL"

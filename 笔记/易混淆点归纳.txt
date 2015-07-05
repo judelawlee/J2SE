@@ -1,0 +1,45 @@
+1.short a=0; 
+a=a+1; //这是有错的，因为1是int型的
+a+=1; //这是正确的
+
+2.求数组的大小：
+int[] a=new int[10];
+数组的大小为：a.length,对数组来说length是属性；但是在求字符串String的长度的时候，length是一个方法，要这样使用：str.length()。
+在java中，数组空间不是连续分配的，所以不要求二维数组的每一维的大小相同。
+
+3.限制字符串的长度：
+  System.out.println(String.format("%04d",232));  //限制最少4位，不够的话前面补0
+
+4.equals()方法用来比较两个对象的地址，但String重写了equals()方法，比较的是值。
+
+5.int i = 5; String t = i + "directory"; 不会报错。
+
+6.java中用final定义常量，但是const依然是java中的保留字，常量被赋值后不能再被重新赋值。
+
+7.抽象类不能被实例化；
+  抽象方法没有方法体，且不能是私有的。
+
+8.当在用Iterator正在遍历List时，删除List中的元素会报如下异常:java.util.ConcurrentModificationException。
+意思是在遍历的时候不能删除或修改其中的元素。
+
+解决方案: 如果在迭代过程中,需要往Collection 或 Map中插入、修改或删除新的元素时,不要用Collection 或
+Map提供的方法直接插入删除,可以考虑通过使用Collection 或 Map的迭代器的新增、删除方法来操作元素。
+
+例:
+		List<String> list = new ArrayList<String>();
+		list.add("1111");
+		list.add("2222");
+		list.add("3333");
+		list.add("4444");
+
+		Iterator<String> i = list.iterator();
+		while (i.hasNext()) {
+			System.out.println(i.next());
+			i.remove();
+		}
+
+		System.out.println("-----------------------");
+
+		for (String s : list) {
+			System.out.println(s);
+		}

@@ -1,0 +1,72 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+/**
+ * Java 备份和还原 SQL Server
+ */
+public class SqlServerOperator {
+
+	public static void main(String[] args) {
+
+		// backup();
+
+		restore();
+	}
+
+	/**
+	 * 备份
+	 */
+	public static void backup() {
+		try {
+			Connection conn = getConn();
+			StringBuilder sql = new StringBuilder();
+			sql.append("use master;");
+			sql.append("backup database cms to disk ='D:\\aaa.bak';");
+			conn.prepareStatement(sql.toString()).execute();
+			conn.close();
+			
+			System.out.println("备份成功！");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 还原(注：还原时必须先关闭SQL Server！！！！！)
+	 */
+	public static void restore() {
+		try {
+			Connection conn = getConn();
+			StringBuilder sql = new StringBuilder();
+			sql.append("use master;");
+			sql.append("restore database cms from disk='D:\\aaa.bak' with replace;");
+			conn.prepareStatement(sql.toString()).execute();
+			conn.close();
+			
+			System.out.println("还原成功！");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 获取Connection连接
+	 */
+	public static Connection getConn() {
+		String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+		String url = "jdbc:sqlserver://10.65.9.111:1433;DatabaseName=cms";
+		String user = "sa";
+		String pwd = "wangzhenyu1203";
+		Connection conn = null;
+
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, pwd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return conn;
+	}
+
+}

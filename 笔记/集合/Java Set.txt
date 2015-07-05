@@ -1,0 +1,4 @@
+Set
+   --HashSet  -->  没有顺序
+   --TreeSet  -->  按自然顺序排列(先数字，后字母，再中文)
+   --LinkedHashSet  -->  按照插入顺序排列

@@ -1,0 +1,191 @@
+集合
+
+List有下标，Set没有下标。
+
+Set（集）
+Set是个接口。
+集合中的对象不按特定方式排序，并且没有重复对象。
+最多包含一个 null 元素
+HashSet（实现了Set接口的类）
+HashSet里面，如果两次存入的值一样，后面的一个将覆盖前面的那个。此类允许使用 null 元素。弱数据类型。不排序，随机放置。
+
+Set hs=new HashSet();  //HashSet hs=new HashSet();   //一样
+		System.out.println(hs.size()); //0
+		System.out.println(hs.isEmpty());  //true
+		System.out.println(hs.contains(null));  //false  //如果此 set 包含指定元素，则返回 true
+        hs.add(new Date());
+		hs.add("hello");
+		hs.add(new Random());
+		for(Object ob : hs){
+		        //System.out.println(ob);
+			if(ob instanceof String){
+		        System.out.println(ob);
+			}else if(ob instanceof Date){
+			    System.out.println(((Date)ob).toLocaleString());
+			}else{
+			    System.out.println(((Random)ob).nextInt(10)+1);//生成1-10随机数
+			}
+		}
+		System.out.println(hs.size()); //3
+		System.out.println(hs.isEmpty());  //false
+		System.out.println(hs.isEmpty());  //false
+
+        Set s1=new HashSet();  
+		s1.add("hello");
+		Set s3=new HashSet();  
+		s3.add("hello");
+		System.out.println(s1.equals(s3));  //true
+		System.out.println(s1.hashCode());    
+
+		Set<String> s2 = new HashSet<String>();
+		s2.add("hello");
+		s2.add("eaccom");
+		s2.add("shenhwa");
+		//s2.add(12);  //错误
+		for(String s : s2){
+		   System.out.println(s);
+		   System.out.println(s1.hashCode()); 
+		}
+
+TreeSet（实现了Set接口的类）
+Set<String> ts=new TreeSet<String>();
+		ts.add("abc1");
+		ts.add("abc2");
+		ts.add("abc3");
+		ts.add("abc2");
+		System.out.println(ts.size()); //3
+        for(String s : ts){
+		  System.out.println(s); 
+		}
+		//使用迭代器，不推荐使用，占内存
+		Iterator<String> it=ts.iterator();
+		while(it.hasNext()){
+		   System.out.println(it.next());
+		}
+
+List（列表）：
+接口。（注：在awt中也有一个List类）
+集合中的对象按照索引位置排序，可以有重复对象。
+ArrayList(实现了List接口的类)
+可以理解成长度可变的数组。
+没有严格的长度要求，指定大小只是初始化时的大小。
+对元素随机访问比较快，但是删除与插入元素较慢。
+List al1 = new ArrayList(2);
+		al1.add("abc0");
+		al1.add("abc1");
+		al1.add(1);
+		al1.add("abc2");
+        System.out.println(al1.get(2));  //1
+		for(Object s : al1){
+		    System.out.println(s);
+		}
+
+		List<String> al2 = new ArrayList<String>(2);
+		al2.add("abc0");
+		al2.add("abc1");
+		al2.add("abc2");
+        System.out.println(al2.get(2));  //abc2
+		for(String s : al2){
+		    System.out.println(s);
+		}
+
+        List<String> list = new ArrayList<String>();
+		list.add(0,"赵六");
+		list.add(1,"李四");
+		list.add(0,"张三");  //在列表的指定位置插入指定元素
+    	for(String name : list){
+		    System.out.println(name);  // 张三、赵六、李四
+		}
+
+Vector 类
+   可以实现可增长的对象数组。
+   与数组一样，它包含可以使用整数索引进行访问的组件。
+   但是，Vector 的大小可以根据需要增大或缩小。		
+
+LinkedList(实现了List接口的类)
+采用链表数据结构，插入和删除元素较快，随机访问较慢。
+//没有使用泛型，需要转换数据类型
+		List stringList=new LinkedList();
+        stringList.add("firstString11");
+        stringList.add("secondString2");
+
+		String str=(String)stringList.iterator().next();   //迭代器
+	    System.out.println(str); //firstString11
+	     
+	    //使用迭代器遍历集合中的所有元素
+	    Iterator it=stringList.iterator();	
+	    while(it.hasNext()){
+	    	String str2=(String)it.next();  //取出集合中的一个元素
+	      System.out.println(str2);  
+	    }
+	     
+	//换成泛型     
+	List<String> stringListT=new LinkedList<String>();
+    stringListT.add("firstString1111");
+	stringListT.add("secondString2222");
+	String str1=stringListT.iterator().next();  //不需要转换类型
+	System.out.println(str1);
+ 
+    Iterator itt=stringListT.iterator();	
+    //遍历集合中的所有元素
+    while(itt.hasNext()){
+    	String  str11=(String)itt.next();  //取出集合中的一个元素,需要转换
+        System.out.println(str11);     
+    }  
+	 
+    //下面是一个死循环
+    /*while(itt.hasNext()){
+    	String str12=stringListT.iterator().next();  //不需要转换类型
+        System.out.println(str12);     
+    }*/
+
+Map（映射）：
+Map也是接口。
+Map是一种把键对象和值对象记性映射的集合，键值对。
+集合中的每一个元素包含一对键对象和值对象，集合中没有重复的键对象，值对象可以重复。
+向Map集合中加入元素时，必须提供一对键对象和值对象。
+从Map中检索元素时，只需给出键对象，就可以返回对应的值对象。
+HashMap(替代了Hashtable)
+允许使用 null 值和 null 键, 不保证映射的顺序
+        Map  m1=new HashMap();
+		//m1.put("01");    //错误
+		//m1.put(123);     //错误
+		m1.put("01","张三");
+		m1.put("01","王五");   //后者覆盖前者
+		m1.put("02","张三");
+		m1.put("03","李四");
+		m1.put("","");  //允许的
+		System.out.println(m1.get("01"));  //王五
+		System.out.println(m1.size());  //4
+		Set<String>  s= m1.keySet();
+		for(String k : s){
+		    System.out.println(m1.get(k));
+		}
+
+Map<String,String> m2=new HashMap<String,String>();
+		m2.put("01","张三");
+		m2.put("01","王五");
+		m2.put("02","张三");
+		m2.put("03","李四");
+		System.out.println(m2.get("01"));  //王五
+		System.out.println(m2.size());  //3
+
+HashTable
+采用同步机制，安全，但影响了性能。
+任何非 null 对象都可以用作键或值。不允许空键和空值。
+
+
+TreeMap
+该映射根据其键的自然顺序进行排序。
+Map<String,Integer> tm = new TreeMap<String,Integer>();
+        tm.put("one",1);
+		tm.put("one",2);
+        tm.put("two",2);
+        tm.put("three",3);
+        tm.put("four",1);
+		System.out.println(tm.size());  //4
+		System.out.println(tm.get("one"));  //2
+		Set<String> s=tm.keySet();
+		for(String key : s){
+		    System.out.println(tm.get(key));
+		}

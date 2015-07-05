@@ -1,0 +1,55 @@
+Java1.5提供了一个叫varargs的功能，就是可变长度的参数。
+
+有点类似于main方法的参数String[] args，我们在命令行运行时args的个数是可变的。
+
+如果你声明如下方法:
+public void test(String... args)
+
+编译时将被解释为:
+public void test(String[] args)
+
+但是这样做还是有一些限制的:
+   在一个方法中只能使用一个省略号定义，也就是只能定义一个可变长的参数。
+
+下面的定义是不合法的:
+public void test(String... args1, float... args2)
+
+例:
+import java.util.Arrays;
+import java.util.List;
+
+public class T {
+
+	public static void main(String[] args) {
+		// test1("aaaa", "bbbb", "cccc");
+		// test1(new String[] { "aaaa1", "bbbb1", "cccc1" });
+		// String[] arr = { "aaaa1", "bbbb1", "cccc1" };
+		// test1(arr);
+		test3("aaaa", "bbbb", "cccc");
+
+		// test2(arr);
+		// test2(new String[] { "aaaa1", "bbbb1", "cccc1" });
+		// test2("aaaa1", "bbbb1", "cccc1"); //这是错误的！
+	}
+
+	public static void test1(String... args) {
+		for (String s : args) {
+			System.out.println(s);
+		}
+	}
+
+	public static void test3(String... args) {
+		List<String> list = Arrays.asList(args);
+		System.out.println(list);
+		for (String s : list) {
+			System.out.println(s);
+		}
+	}
+
+	public static void test2(String[] args) {
+		for (String s : args) {
+			System.out.println(s);
+		}
+	}
+
+}

@@ -1,0 +1,68 @@
+一、Java内置基本注解
+　　在Java中内置几种了基本的注解，下面列出几种常用的注解：
+　　1、@Deprecated：用该注解注释的程序元素，表明不鼓励程序员使用这样的元素，通常是它很危险或存在更好的选择。
+　　2、@Override：表明当前的方法定义将覆盖超类中的方法。
+　　3、@SuppressWarnings：表明关闭不当的编译器警告信息。
+  　4、@Documented：表明某一类型的注释将通过javadoc和类似的默认工具进行文档化。
+  　5、@Inherited：允许子类继承父类中的注解。
+　　6、@Retention：表明需要在什么级别保存该注解信息。
+　　7、@Target：表明该注解可以用于什么地方。
+　　8、@Generated：该注解用于标记已生成的源代码，它可以用于区分单个文件中用户编写的代码和生成的代码。
+　　9、@PostConstruct：该注解用于在依赖关系注入完成之后需要执行的方法上，以执行任何初始化。
+　　10、@PreDestroy：该注解作为回调通知用于各方法，以表示该实例正处于被容器移除的过程中。
+　　11、@Resource：该注解用于标记应用程序所需要的资源。
+
+二、定义注解
+　　注解的定义看起来很像接口的定义，具体代码如下：
+
+Java代码 
+import java.lang.annotation.*;    
+   
+@Target(ElementType.METHOD)    
+@Retention(RetentionPolicy.RUTIME)    
+public @interface Test {} 
+
+import java.lang.annotation.*; 
+
+@Target(ElementType.METHOD) @Retention(RetentionPolicy.RUTIME) 
+public @interface Test {}
+
+除了@符号之外，@Test的定义很像一个空的接口，定义一个注解的时候，要用到一些元注解（Java内置的注解），
+如上面例子中的定义，@Target表明新定义的注解将用于方法定义上，@Retention表明新定义的注解将在运行时起作用。
+在注解中，一般都会包含一些元素以表示某些值，而没有元素的注解称为标记注解，如上面的@Test注解。
+
+下面定义一个新的注解，将包含一些元素，如：
+
+Java代码 
+import java.lang.annotation.*;    
+   
+@Target(ElementType.METHOD)    
+@Retention(RetentionPolicy.RUNTIME)    
+public @interface UseCase    
+{    
+　　public int id();    
+　　public String description() default "no description";    
+}  
+
+import java.lang.annotation.*; 
+
+@Target(ElementType.METHOD) @Retention(RetentionPolicy.RUNTIME) 
+public @interface UseCase { 　　
+    public int id(); 　　
+    public String description() default "no description";
+}
+ 
+该注解中定义了两个元素id和description，其中description元素通过default指定了默认值。
+
+三、注解处理器
+　　如果没有用来读取注解的工具，那注解也不会比注释更有用，使用注解的过程中，很重要的一部分就是创建
+与使用注解处理器，而注解处理器的编写需要更加实际应用来灵活应用。
+
+四、注意地方
+　　1、注解元素可以用的类型只有：所有基本类型(int,float,boolean)、String、Class、enum、Annotation，
+       以上类型的数组。
+
+　　2、在定义元素的默认值时有限制，首先，元素不能有不确定的值，也就是说，元素必须要么具有默认值，要么
+       在使用注解时提供元素的值；其次，对于非基本类型的元素，不能以null作为其值。
+
+　　3、注解不支持继承。
