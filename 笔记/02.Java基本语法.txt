@@ -30,7 +30,7 @@ switch语句：
        }
      }
 ------------------------------------------------------------------------------------
-while语句：
+while语句:
     int i=10;
     while(i>0){
 	System.out.println("Hello"+i);
@@ -38,20 +38,20 @@ while语句：
     }
 注：在Java里while(1){}不是死循环，会出错，因为Java不能识别1为true。
 ------------------------------------------------------------------------------------
-do-while语句：
+do-while语句:
    int n=10;
    do{
    	System.out.println("Hello"+n);
    	n--;
    }while(n>0);
 ------------------------------------------------------------------------------------
-for语句：
+for语句:
    for(int i=1;i<10;i++){
       System.out.println(i);
    }
-注：for( ; ; ){…}
+注：for( ; ; ){...}
 ------------------------------------------------------------------------------------
-foreach语句：
+foreach语句:
    int[] nums={1,2,3,4,5,6,7,8,9};
    for(int x : nums){
       System.out.println("Hello"+x);
@@ -60,7 +60,7 @@ foreach语句：
 continue结束本次循环，条件允许，开始下次循环
 break终止循环
 ------------------------------------------------------------------------------------
-控制台中三种常用的输入方法：
+控制台中三种常用的输入方法:
 1.
 import java.util.Scanner;
 
@@ -92,7 +92,7 @@ System.out.println("欢迎"+uname+"\n你的密码是:"+upwd);
 Random r=new Random();  
 int a=r.nextInt(b-a+1)+a;
 ------------------------------------------------------------------------------------
-数组：
+数组:
 int[] a=new int[10];
 int[] a=new int[]{1,2,3,4,5,6,7,8,9};
 int[] a={1,2,3,4,5,6,7,8,8};
@@ -100,20 +100,20 @@ int[] a={1,2,3,4,5,6,7,8,8};
 求数组的大小：a.length,length是属性；但是在求字符串String的长度的时候，
               length是一个方法，要这样使用：str.length()。
 
-调用：a[i];
+调用: a[i];
 
 java中数组的下标从零开始，List集合的下标也是从零开始。
 ------------------------------------------------------------------------------------
-多维数组：
-注：在java中，数组空间不是连续分配的，所以不要求二维数组的每一维的大小相同。
+多维数组:
+注:在java中，数组空间不是连续分配的，所以不要求二维数组的每一维的大小相同。
 int[][] a=new int[3][3];
 int[][] a={{1,2,3},{4,5,6},{7,8,9}};
 
-调用：a[i][j]。
+调用: a[i][j]。
 
-数组的遍历：
-一维数组的遍历：见上面的foreach语句。
-二维数组的遍历：
+数组的遍历:
+一维数组的遍历:见上面的foreach语句。
+二维数组的遍历:
 int[][] num = {{1,2,3},{4,5,6},{7,8,9}};
 for(int m=0;m<num.length;m++){
     for(int n=0;n<num[m].length;n++){
@@ -123,7 +123,7 @@ for(int m=0;m<num.length;m++){
 
 不管一维还是二维，在使用前（赋值、访问）必须初始化，可以用new默认初始化，也可以用数组常量初始化。
 ------------------------------------------------------------------------------------
-递归：（方法内部调用自己）
+递归:（方法内部调用自己）
 求阶乘：
 	public static int getJieCheng(int num){
 	     if(num<=1){
@@ -133,7 +133,7 @@ for(int m=0;m<num.length;m++){
 	     }
 	}
 
-输出菲波纳西数列：
+输出菲波纳西数列:
        public static long f(int n){
 		if(n==1||n==2){
 			return 1;
@@ -142,12 +142,12 @@ for(int m=0;m<num.length;m++){
 		}
        }
 ------------------------------------------------------------------------------------
-异常：
-异常语句的几种形式：
+异常:
+异常语句的几种形式:
 1.try{…}catch(Exception e){…}
 
 2.try{…}catch(Exception e){…}finally{…}
-注：使用finally时，不论程序有无异常发生，最终都会执行finally语句。
+注:使用finally时，不论程序有无异常发生，最终都会执行finally语句。
 
 3.
 try{
@@ -161,13 +161,13 @@ try{
 catch(Exception e){
     …
 }finally{…}
-注：使用此种形式的语句时，Exception必须放在最后，因为Exception类是所有异常类的父类。
+注:使用此种形式的语句时，Exception必须放在最后，因为Exception类是所有异常类的父类。
 
 4.try{…} finally{…}
 
-异常语句中的关键字：try、catch、finally、throw、throws。
+异常语句中的关键字: try、catch、finally、throw、throws。
 
-自定义异常的格式：
+自定义异常的格式:
 public class MyException extends Exception{
    ……
 }
@@ -177,7 +177,7 @@ public void show(String ss) throws ArithmeticException,ArrayIndexOutOfBoundsExce
    ……
 }
 
-调用时：
+调用时:
 try{
     show(s);
 }catch(ArithmeticException ae){

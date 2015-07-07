@@ -9,7 +9,7 @@ public static void main(String[] args) {
 
 }
 
-输出结果：
+输出结果:
 java.runtime.name:Java(TM) SE Runtime Environment
 sun.boot.library.path:D:\jdk\jre\bin
 java.vm.version:10.0-b19

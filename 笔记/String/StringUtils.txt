@@ -1,13 +1,16 @@
-import java.util.UUID;
 
-import org.apache.commons.lang.StringUtils;
+String常见操作:
 
-public class Test {
+--常用工具类
+org.apache.commons.lang.StringUtils
 
-	public static void main(String[] args) {
-		String s=UUID.randomUUID().toString();
-		System.out.println(s);
-		System.out.println(StringUtils.remove(s, "-"));
-	}
+--移除字符
+StringUtils.remove(s, "-")
 
-}
+--替换子串
+String a = "[dfsadfsd]";
+a.replaceAll("\\u005B", ""));
+a.replaceAll("\\[", ""));
+
+--格式化(限制最少4位，不够的话前面补0)
+String.format("%04d", 232)  
