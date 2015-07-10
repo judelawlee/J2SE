@@ -139,7 +139,8 @@ public class TimerDemo {
 start 
 sleep
 run
-join
+join -- 等待该线程终止，可以理解为该线程是指的主线程等待子线程的终止。
+        也就是在子线程调用了join()方法后面的代码，只有等到子线程结束了才能执行。
 yield
 
 线程同步

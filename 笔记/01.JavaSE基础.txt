@@ -40,7 +40,15 @@ javadoc –d test Hello.java
 --打包
 1.编译 javac Hello.java
 2.打包 jar cvf t.jar Hello.class
-3.运行 java –jar t.jar 
+3.运行 java -jar t.jar
+
+--运行jar包
+java -classpath ./* com.alibaba.dubbo.container.Main
+java -cp ./* com.alibaba.dubbo.container.Main
+(-classpath可以简写为-cp，引入jar包不支持*.jar这种通配，会无法匹配，但是*却可以)
+
+--查看jdk中的2D演示
+jdk\demo\jfc\java2D>java -jar Java2Demo.jar
 -----------------------------------------------------------------------------------------------
 java语言有三种注释
 1.单行注释： // 

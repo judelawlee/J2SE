@@ -1,0 +1,73 @@
+
+SimpleDateFormat 用来对日期字符串进行解析和格式化输出，但是因为 DateFormat 和 SimpleDateFormat 类
+都不是线程安全的，在多线程环境下调用 format() 和 parse() 方法应该使用同步代码来避免问题。
+
+示例一(每次都创建新的SimpleDateFormat对象实例):
+public class DateUtil {
+    public static  String formatDate(Date date) throws ParseException{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(date);
+    }
+    
+    public static Date parse(String strDate) throws ParseException{
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.parse(strDate);
+    }
+}
+
+这个示例会创建大量的SimpleDateFormat实例对象，占用大量的内存和 jvm空间。
+在需要用到SimpleDateFormat的地方新建一个实例，不管什么时候，将有线程安全问题的对象由共享变为局部私有
+都能避免多线程问题，不过也加重了创建对象的负担。在一般情况下，这样其实对性能影响比不是很明显的。
+
+示例二(静态SimpleDateFormat对象):
+public class DateUtil {
+    private static final  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    
+    public static  String formatDate(Date date) throws ParseException{
+        return sdf.format(date);
+    }
+    
+    public static Date parse(String strDate) throws ParseException{
+        return sdf.parse(strDate);
+    }
+}
+
+这个示例创建了一个静态的SimpleDateFormat实例，在使用时直接使用这个实例进行操作，避免了每次都
+创建SimpleDateFormat实例对象。这个方法在大部分的时间里都会工作得很好。但当你在生产环境中使用
+一段时间之后，你就会发现这么一个事实:它不是线程安全的。在正常的测试情况之下，都没有问题，但一旦
+在生产环境中一定负载情况下时，这个问题就出来了。它会出现各种不同的情况，比如转化的时间不正确，比
+如报错，比如线程被挂死等等。
+
+优化过的静态的SimpleDateFormat版，之所在并发情况下会出现各种灵异错误，是因为SimpleDateFormat和
+DateFormat类不是线程安全的。我们之所以忽视线程安全的问题，是因为从SimpleDateFormat和DateFormat类
+提供给我们的接口来看，实在让人看不出它与线程安全有何相干。
+
+SimpleDateFormat中的日期格式不是同步的。推荐（建议）为每个线程创建独立的格式实例。如果多个线程
+同时访问一个格式，则它必须保持外部同步。
+
+示例三(同步SimpleDateFormat对象):
+public class DateSyncUtil {
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      
+    public static String formatDate(Date date)throws ParseException{
+        synchronized(sdf){
+            return sdf.format(date);
+        }  
+    }
+    
+    public static Date parse(String strDate) throws ParseException{
+        synchronized(sdf){
+            return sdf.parse(strDate);
+        }
+    } 
+}
+
+当线程较多时，当一个线程调用该方法时，其他想要调用此方法的线程就要block，多线程并发量大的时候会对
+性能有一定的影响。
+
+示例四(使用common-lang包中的工具类):
+DateFormatUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss");
+DateUtils.parseDate("2015-07-08 16:30:18", new String[] { "yyyy-MM-dd HH:mm:ss" });
+
+推荐博客: 
+http://www.cnblogs.com/peida/archive/2013/05/31/3070790.html
