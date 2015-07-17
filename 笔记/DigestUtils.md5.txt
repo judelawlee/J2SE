@@ -1,0 +1,24 @@
+
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
+
+public class Test {
+	public static void main(String[] args) throws DecoderException {
+		String s = "18368830160";
+		// System.out.println(DigestUtils.md5Hex(s));
+
+		// Hex hex = new Hex();
+		Base64 base64 = new Base64();
+		// Base64±àÂë
+		byte[] b1 = base64.encode(s.getBytes());
+		String s1 = new String(b1);
+		System.out.println(s1);
+
+		// Base64½âÂë
+		byte[] b2 = base64.decode(b1);
+		String s2 = new String(b2);
+		System.out.println(s2);
+	}
+}

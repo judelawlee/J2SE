@@ -1,0 +1,114 @@
+Collections.sort() 可以对 List 进行排序 
+--------------------------------------------------------------------
+案例一:
+public class User {
+
+	private int id;
+	private String name;
+	private int age;
+
+}
+
+public static void main(String[] args) {
+	User u1 = new User();
+	u1.setId(1);
+	u1.setName("Jack");
+	u1.setAge(25);
+
+	User u2 = new User();
+	u2.setId(2);
+	u2.setName("Tommy");
+	u2.setAge(27);
+
+	User u3 = new User();
+	u3.setId(3);
+	u3.setName("David");
+	u3.setAge(28);
+
+	List<User> list = new ArrayList<User>();
+	list.add(u3);
+	list.add(u1);
+	list.add(u2);
+
+	Collections.sort(list, new Comparator<User>() {
+		@Override
+		public int compare(User u1, User u2) {
+			// 按照年龄升序排列
+			return u1.getAge() > u2.getAge() ? 1 : -1;
+			// 按照年龄降序排列
+			// return u1.getAge() > u2.getAge() ? -1 : 1;
+		}
+	});
+
+	for (User u : list) {
+		System.out.println(JSON.toJSONString(u));
+	}
+}
+
+//结果:
+{"age":25,"id":1,"name":"Jack"}
+{"age":27,"id":2,"name":"Tommy"}
+{"age":28,"id":3,"name":"David"}
+
+--------------------------------------------------------------------
+案例二:
+//一个POJO例子
+class User {
+	String name;
+	String age;
+
+	public User(String name,String age){
+		this.name=name;
+		this.age=age;
+	}
+}
+
+//具体的比较类，实现Comparator接口
+import java.util.Comparator;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class ComparatorUser implements Comparator{
+	public int compare(Object arg0, Object arg1) {
+		User user0=(User)arg0;
+		User user1=(User)arg1;
+
+		//首先比较年龄，如果年龄相同，则比较名字
+		int flag=user0.getAge().compareTo(user1.getAge());
+		if(flag==0){
+			return user0.getName().compareTo(user1.getName());
+		}else{
+			return flag;
+		} 
+	}
+}
+
+//测试
+public static void main(String[] args){
+	List userlist=new ArrayList();
+	userlist.add(new User("dd","4"));
+	userlist.add(new User("aa","1"));
+	userlist.add(new User("ee","5"));
+	userlist.add(new User("bb","2")); 
+	userlist.add(new User("ff","5"));
+	userlist.add(new User("cc","3"));
+	userlist.add(new User("gg","6"));
+
+	ComparatorUser comparator=new ComparatorUser();
+	Collections.sort(userlist, comparator);
+
+	for (int i=0;i<userlist.size();i++){
+		User user_temp=(User)userlist.get(i);
+		System.out.println(user_temp.getAge()+","+user_temp.getName()); 
+	}
+}
+
+//结果(首先年龄排序，如果年龄相同，则按名字排序):
+1, aa
+2, bb
+3, cc
+4, dd
+5, ee //注意:同样是5岁的人，则比较名字(ee,ff)，然后排序
+5, ff
+6, gg
