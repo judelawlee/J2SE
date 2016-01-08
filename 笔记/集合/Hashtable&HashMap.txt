@@ -1,0 +1,14 @@
+
+
+Hashtable 和 HashMap 区别:
+1.继承不同:
+public class Hashtable extends Dictionary implements Map
+public class HashMap  extends AbstractMap implements Map
+	
+2.Hashtable中的方法是同步的（Hashtable的所有 public 方法声明中都有 synchronized 关键字），
+所以Hashtable是线程安全的，而HashMap中的方法在缺省情况下是非同步的。
+但是在Collections类中存在一个静态方法: synchronizedMap()，该方法创建了一个线程安全的Map对象，并把
+它作为一个封装的对象来返回，所以通过Collections类的synchronizedMap方法是可以同步访问潜在的HashMap。
+
+3.Hashtable中，key和value都不允许出现null值。
+在HashMap中，null可以作为键，这样的键只有一个; 可以有一个或多个键所对应的值为null。
