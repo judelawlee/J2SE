@@ -12,18 +12,19 @@
 Java里面线程池的顶级接口是Executor，但是严格意义上讲Executor并不是一个线程池，而只是一个执行
 线程的工具。真正的线程池接口是ExecutorService。
 
-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
 
 ThreadPoolExecutor的完整构造方法的签名是:
-ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, 
-	TimeUnit unit, BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory, 
+
+ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime,
+	TimeUnit unit, BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory,
 	RejectedExecutionHandler handler).
 
 corePoolSize     - 池中所保存的线程数，包括空闲线程。
 maximumPoolSize  - 池中允许的最大线程数。
 keepAliveTime    - 当线程数大于核心时，此为终止前多余的空闲线程等待新任务的最长时间。
 unit             - keepAliveTime 参数的时间单位。
-workQueue        - 执行前用于保持任务的队列。此队列仅保持由 execute方法提交的 Runnable任务。
+workQueue        - 执行前用于保持任务的队列。此队列仅保持由 execute 方法提交的 Runnable 任务。
 threadFactory    - 执行程序创建新线程时使用的工厂。
 handler          - 由于超出线程范围和队列容量而使执行被阻塞时所使用的处理程序。
 
@@ -33,3 +34,9 @@ ThreadPoolExecutor是Executors类的底层实现。
    "强烈建议程序员使用较为方便的Executors工厂方法Executors.newCachedThreadPool()（无界线程池，
 可以进行自动线程回收）、Executors.newFixedThreadPool(int)（固定大小线程池）、
 Executors.newSingleThreadExecutor()（单个后台线程），它们均为大多数使用场景预定义了设置。"
+
+Java通过Executors提供四种线程池，分别为:
+ newCachedThreadPool 创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。
+ newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
+ newSingleThreadExecutor 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO、LIFO、优先级)执行。
+ newScheduledThreadPool 创建一个定长线程池，支持定时及周期性任务执行。

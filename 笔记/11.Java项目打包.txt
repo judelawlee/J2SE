@@ -1,23 +1,36 @@
-jar -cvfe t.jar Test *.class  //½«ËùÓĞµÄclassÎÄ¼ş´ò°üµ½Ëût°üÖĞ£¬TestÎªÈë¿ÚÀà
-jar -cvfe t.jar Test .  //½«¸ÃÄ¿Â¼ÏÂËùÓĞÎÄ¼ş´ò°ü
+
+--å°†æ‰€æœ‰çš„classæ–‡ä»¶æ‰“åŒ…åˆ°ä»–tåŒ…ä¸­ï¼ŒTestä¸ºå…¥å£ç±»
+jar -cvfe t.jar Test *.class
+
+--å°†è¯¥ç›®å½•ä¸‹æ‰€æœ‰æ–‡ä»¶æ‰“åŒ…
+jar -cvfe t.jar Test .
 jar -cvfm t.jar a.txt *.class
 
 
 D:\bank\src>javac -d ../classes *.java
 D:\bank\src>jar -cvfe bank.jar Login *.java
 
-±àÒë£º D:\bank\src>javac -d ../classes *.java
-ÔËĞĞ£º D:\bank\classes>java com.ui.Login »ò D:\beta\classes>java com/ui/Login
-´ò°ü£º D:\beta\classes>jar cvfe ../bank.jar com.ui.Login com/tools/*.class com/ui/*.class com/
-dao/*.class
-°ÑÎÄ±¾ÎÄ¼ş´òÈëjar°ü£ºD:\beta>jar cvfm h.jar m.txt
-ÔËĞĞjarÎÄ¼ş£º  D:\bankmyth1>java -jar bankmyth1.jar
+--ç¼–è¯‘
+D:\bank\src>javac -d ../classes *.java
+
+--è¿è¡Œ
+D:\bank\classes>java com.ui.Login æˆ– D:\beta\classes>java com/ui/Login
+
+--æ‰“åŒ…
+D:\beta\classes>jar cvfe ../bank.jar com.ui.Login com/tools/*.class com/ui/*.class com/dao/*.class
+
+--æŠŠæ–‡æœ¬æ–‡ä»¶æ‰“å…¥jaråŒ…
+D:\beta>jar cvfm h.jar m.txt
+
+--è¿è¡Œjaræ–‡ä»¶
+D:\bankmyth1>java -jar bankmyth1.jar
 
 
+---------------------------------------------------------------------------------------------------
 
 
-ÀÏÊ¦½²µÄ£º
-ÏµÍ³»·¾³±äÁ¿
+è€å¸ˆè®²çš„ï¼š
+ç³»ç»Ÿç¯å¢ƒå˜é‡
 java_home = e:\jdk
 classpath = .;e:\jdk\lib
 path      = .;e:\jdk\bin;e:\jdk\lib;
@@ -25,53 +38,52 @@ path      = .;e:\jdk\bin;e:\jdk\lib;
 
 C:\aaa>java com.H
 
-jar
 
 jar -cvfe t.jar Test *.java
 java -jar t.jar
 
-//ÔÚaaaÄ¿Â¼ÖĞËæ±ã½¨Á¢Ò»¸öm.txtÎÄ¼ş£¬È»ºóÖ´ĞĞÈçÏÂÃüÁî½øĞĞ´ò°ü¡£
+//åœ¨aaaç›®å½•ä¸­éšä¾¿å»ºç«‹ä¸€ä¸ªm.txtæ–‡ä»¶ï¼Œç„¶åæ‰§è¡Œå¦‚ä¸‹å‘½ä»¤è¿›è¡Œæ‰“åŒ…ã€‚
 C:\aaa>jar cvfm h.jar m.txt .
-±êÃ÷Çåµ¥(manifest)
-Ôö¼Ó£ºabc/(¶ÁÈë= 0) (Ğ´³ö= 0)(´æ´¢ÁË 0%)
-Ôö¼Ó£ºabc/D.class(¶ÁÈë= 412) (Ğ´³ö= 289)(Ñ¹ËõÁË 29%)
-Ôö¼Ó£ºcom/(¶ÁÈë= 0) (Ğ´³ö= 0)(´æ´¢ÁË 0%)
-Ôö¼Ó£ºcom/H.class(¶ÁÈë= 412) (Ğ´³ö= 288)(Ñ¹ËõÁË 30%)
-Ôö¼Ó£ºm.txt(¶ÁÈë= 0) (Ğ´³ö= 0)(´æ´¢ÁË 0%)
+æ ‡æ˜æ¸…å•(manifest)
+å¢åŠ ï¼šabc/(è¯»å…¥= 0) (å†™å‡º= 0)(å­˜å‚¨äº† 0%)
+å¢åŠ ï¼šabc/D.class(è¯»å…¥= 412) (å†™å‡º= 289)(å‹ç¼©äº† 29%)
+å¢åŠ ï¼šcom/(è¯»å…¥= 0) (å†™å‡º= 0)(å­˜å‚¨äº† 0%)
+å¢åŠ ï¼šcom/H.class(è¯»å…¥= 412) (å†™å‡º= 288)(å‹ç¼©äº† 30%)
+å¢åŠ ï¼šm.txt(è¯»å…¥= 0) (å†™å‡º= 0)(å­˜å‚¨äº† 0%)
 
-//´ò°üºó£¬ÓÃEditplusÈí¼ş´ò¿ª°üÖĞµÄmanifest.mfÎÄ¼şÔÚµÚÈıĞĞ¼ÓÈëMain-Class: com.H¼´¿É¡£
+//æ‰“åŒ…åï¼Œç”¨Editplusè½¯ä»¶æ‰“å¼€åŒ…ä¸­çš„manifest.mfæ–‡ä»¶åœ¨ç¬¬ä¸‰è¡ŒåŠ å…¥Main-Class: com.Hå³å¯ã€‚
 C:\aaa>java -jar h.jar
 Hello World!
 
-1.½«javaÎÄ¼ş½øĞĞ±àÒë
+1.å°†javaæ–‡ä»¶è¿›è¡Œç¼–è¯‘
 c:\test\src>javac -d ../classes *.java
 
-×÷ÓÃÊÇ½«µ±Ç°Ä¿Â¼srcÏÂËùÓĞµÄjavaÎÄ¼ş±àÒëµ½ÉÏ¼¶Ä¿Â¼ÖĞµÄclassesÄ¿Â¼ÏÂ£¬
-²¢Ö±½Ó´´½¨°ü
+ä½œç”¨æ˜¯å°†å½“å‰ç›®å½•srcä¸‹æ‰€æœ‰çš„javaæ–‡ä»¶ç¼–è¯‘åˆ°ä¸Šçº§ç›®å½•ä¸­çš„classesç›®å½•ä¸‹ï¼Œ
+å¹¶ç›´æ¥åˆ›å»ºåŒ…
 
 C:\>javac -d c:\test\classes c:\test\src\*.java
 
 
-2.Ö±½Ó½øÈëclassesÄ¿Â¼ÏÂ,½¨Á¢Ò»¸öÎÄ±¾ÎÄ¼şÃüÃûÎªm.txt£¬
-  ÄÚÈİÈçÏÂ£ºmain-class: com.hw.util.Util
-  »¹ÒªÓĞµÚ¶şĞĞ¿ÕĞĞ
-È»ºóÔÚclassesÄ¿Â¼Ö´ĞĞÈçÏÂÃüÁî,½«ÏîÄ¿´òµ½c:ÅÌÏÂÏîÄ¿Îªt.jar
+2.ç›´æ¥è¿›å…¥classesç›®å½•ä¸‹,å»ºç«‹ä¸€ä¸ªæ–‡æœ¬æ–‡ä»¶å‘½åä¸ºm.txtï¼Œ
+  å†…å®¹å¦‚ä¸‹ï¼šmain-class: com.hw.util.Util
+  è¿˜è¦æœ‰ç¬¬äºŒè¡Œç©ºè¡Œ
+ç„¶ååœ¨classesç›®å½•æ‰§è¡Œå¦‚ä¸‹å‘½ä»¤,å°†é¡¹ç›®æ‰“åˆ°c:ç›˜ä¸‹é¡¹ç›®ä¸ºt.jar
 F:\classes>jar -cmf m.txt c:\t.jar *.*
 
-3.ÔËĞĞÏîÄ¿
+3.è¿è¡Œé¡¹ç›®
 c:\>java -jar t.jar
 
 
-4.±àĞ´Ò»¸öÅú´¦Àí³ÌĞò
+4.ç¼–å†™ä¸€ä¸ªæ‰¹å¤„ç†ç¨‹åº
 
 bank.bat
 
 @echo off
-title Ä³Ä³¹ñÔ±»úÏµÍ³
+title æŸæŸæŸœå‘˜æœºç³»ç»Ÿ
 color 4e
 cls
 echo -----------------------
-echo --  Ä³Ä³¹ñÔ±»úÏµÍ³   --
+echo --  æŸæŸæŸœå‘˜æœºç³»ç»Ÿ   --
 echo -----------------------
 java -jar t.jar
 pause
@@ -82,22 +94,22 @@ ok.bat
 javac -d c:\test\classes c:\test\src\*.java
 cd c:\test\classes
 jar -cmf m.txt c:\t.jar *.*
-copy c:\t.jar "c:\Documents and Settings\Administrator\×ÀÃæ\"
+copy c:\t.jar "c:\Documents and Settings\Administrator\æ¡Œé¢\"
 pause
 
 
 -------------------------------------------------------------------
-ÅúÁ¿±àÒë: javac *.java
+æ‰¹é‡ç¼–è¯‘: javac *.java
 
-1.ÏÈ¼Ó¸ö°ü package com; ÏÈÊÖ¶¯½¨Ò»¸öcomÎÄ¼ş¼Ğ£»
-  ±àÒë:javac -d Test.java  
-  Ö´ĞĞ£ºjava com.Test
+1.å…ˆåŠ ä¸ªåŒ… package com; å…ˆæ‰‹åŠ¨å»ºä¸€ä¸ªcomæ–‡ä»¶å¤¹ï¼›
+  ç¼–è¯‘:javac -d Test.java
+  æ‰§è¡Œï¼šjava com.Test
 
-2.javadoc:Éú³ÉÎÄµµ
-±ØĞëÏÈÓĞ¹«¿ªÀà£¬ÓĞ×¢ÊÍÎÄµµ
+2.javadoc:ç”Ÿæˆæ–‡æ¡£
+å¿…é¡»å…ˆæœ‰å…¬å¼€ç±»ï¼Œæœ‰æ³¨é‡Šæ–‡æ¡£
 javadoc -d test Test.java
 
-3.´ò°üÃüÁî:jar 
-  ÏÈ±àÒë:javac Test.java
-  Ö´ĞĞ:jar cvf t.jar Test.class
-  ÔËĞĞ:java -jar t.jar
+3.æ‰“åŒ…å‘½ä»¤:jar
+  å…ˆç¼–è¯‘:javac Test.java
+  æ‰§è¡Œ:jar cvf t.jar Test.class
+  è¿è¡Œ:java -jar t.jar
