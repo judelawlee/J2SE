@@ -1,59 +1,60 @@
-���߳�:���߳��ü������ͬһʱ��β��д��������ͬ������
+多线程:多线程让计算机在同一时间段并行处理多个不同的任务。
 
-*������ָ�����е�Ӧ�ó���ÿ�����̶����Լ��������ڴ�ռ䣬һ��Ӧ�ó������ͬʱ����������̡�
-*�߳���ָ�����е�һ��ִ�����̣�һ�����̿����ɶ���߳���ɡ�
-*���߳���ʵ�ֲ������Ƶ�һ����Ч�ֶΡ�
-*���̵߳�Ŀ����Ϊ������޶ȵ�����CPU��Դ��
-*���̺��̶߳���ʵ�ֲ����Ե�һ��������λ��
-*�߳��ǽ����ڵĿ�ִ�е�Ԫ��
-*ÿ�����̶���һ��ר�õ��ڴ������߳�ȴ�ǹ������ڽ��̵��ڴ浥Ԫ��
-*�̰߳�ȫ��
+*进程是指运行中的应用程序，每个进程都有自己独立的内存空间，一个应用程序可以同时启动多个进程。
+*线程是指进程中的一个执行流程，一个进程可以由多个线程组成。
+*多线程是实现并发机制的一种有效手段。
+*多线程的目的是为了最大限度的利用CPU资源。
+*进程和线程都是实现并发性的一个基本单位。
+*线程是进程内的可执行单元。
+*每个进程都有一段专用的内存区域，线程却是共享所在进程的内存单元。
+*线程安全。
 
-�����̵߳����ַ�ʽ:
-1������Thread������࣬����Thread���run()������Ȼ�󴴽��������ʵ����
-2������ʵ��Runnable�ӿڵ��࣬ʵ�ֽӿڵ�run()������Ȼ��������ʵ����ΪThread�Ĺ��췽���Ĳ�����
-   ����Thread���ʵ����
+创建线程的两种方式:
+1）定义Thread类的子类，覆盖Thread类的run()方法，然后创建该子类的实例。
+2）定义实现Runnable接口的类，实现接口的run()方法，然后将这个类的实例作为Thread的构造方法的参数，
+   创建Thread类的实例。
 
-Thread��Runnable�Ĺ�ϵ:Threadʵ����Runnable��run()������
+Thread与Runnable的关系:Thread实现了Runnable的run()方法。
 
-�̵߳����ȼ�:
-��Thread���������������߳����ȼ��ľ�̬���ͳ���:
-MAX_PRIORITY: ������ȼ���10;
-MIN_PRIORITY: ��С���ȼ���1;
-NORM_PRIORITY: ��׼����ͨ�����ȼ���5��
+线程的优先级:
+在Thread类中有三个设置线程优先级的静态整型常量:
+MAX_PRIORITY: 最大优先级，10;
+MIN_PRIORITY: 最小优先级，1;
+NORM_PRIORITY: 标准（普通）优先级，5。
 
-�̵߳���������:
-  1���½�״̬��new;
-  2������״̬��start();
-  3������״̬��run();
-  4������״̬��sleep()��suspend()��wait();
-  5����ֹ״̬��stop()�����߳�ִ����run()������������Ȼ��ֹ���С�
+线程的生命周期:
+  1）新建状态，new;
+  2）就绪状态，start();
+  3）运行状态，run();
+  4）堵塞状态，sleep()、suspend()、wait();
+  5）终止状态，stop()，当线程执行完run()方法，它将自然终止运行。
 
 
-�̳�Thread��:
+继承Thread类:
 class MThread extends Thread {
 	public MThread(String s){
 		super(s);
 	}
     public void run(){
 		for(int i=0;i<10;i++){
-			System.out.println(" "+this.getName());  //����̵߳�����
+			System.out.println(" "+this.getName());  //输出线程的名字
 			try{
-				sleep(500);  //����0.5��
-				//sleep((int)(Math.random()*500));  //����0��0.5��
+				sleep(500);  //休眠0.5秒
+				//sleep((int)(Math.random()*500));  //休眠0到0.5秒
 			}catch(Exception e){
 				return;
 			}
 		}
 	}
 }
+
 public class  ThreadDemo{
 	public static void main(String[] args) {
-		System.out.println(Thread.currentThread().getName());  //main,���ضԵ�ǰ����ִ�е��̵߳�����
-	    System.out.println(Thread.activeCount());  //1,���ص�ǰ�̵߳��߳����л�̵߳���Ŀ
+		System.out.println(Thread.currentThread().getName());  //main,返回对当前正在执行的线程的名字
+	    System.out.println(Thread.activeCount());  //1,返回当前线程的线程组中活动线程的数目
 		MThread no=new MThread("No");
 		MThread yes=new MThread("Yes");
-		System.out.println(no.getPriority());  //5,�õ�no�����ȼ�
+		System.out.println(no.getPriority());  //5,得到no的优先级
 		System.out.println(yes.getPriority());
 		no.start();
 		System.out.println(Thread.activeCount());  //2
@@ -63,7 +64,7 @@ public class  ThreadDemo{
 }
 
 
-ʵ��Runnable�ӿ�:
+实现Runnable接口:
 public class MyThread extends Thread {
 	public static void main(String[] args) {
 		Thread t1=new Thread01("one");
@@ -91,7 +92,7 @@ class Thread01 extends Thread {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-	}  
+	}
 }
 
 class Thread02 implements Runnable {
@@ -108,61 +109,61 @@ class Thread02 implements Runnable {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-	}  
+	}
 }
 
 
-�̵߳�ͬ��: synchronized
-�����߳�ͬ���Ļ����� synchronized �ؼ��֣�
-�����������÷�: synchronized ������ synchronized �顣
+线程的同步: synchronized
+定义线程同步的机制是 synchronized 关键字，
+它包括两种用法: synchronized 方法和 synchronized 块。
 
-Timer��TimerTask
+Timer、TimerTask
 import java.util.*;
 public class TimerDemo {
 	public static void main(String[] args) {
 		TimerTask tt=new TimerTask(){
 			public void run(){
-				System.out.println("��ӭ��");
+				System.out.println("欢迎你");
 				System.exit(0);
 			}
 		};
 		Timer t=new Timer();
-		t.schedule(tt,5000);  //�ӳ�5��ִ��
+		t.schedule(tt,5000);  //延迟5秒执行
 	}
 }
 
 
-�߳���һ�������ﲻͬ��ִ��·����
-������һ����̬�ĸ��
-����ʹ��Runnable�ӿڡ� 
+线程是一个程序里不同的执行路径。
+进程是一个静态的概念。
+优先使用Runnable接口。
 
-start 
+start
 sleep
 run
-join -- �ȴ����߳���ֹ����������Ϊ���߳���ָ�����̵߳ȴ����̵߳���ֹ��
-        Ҳ���������̵߳�����join()��������Ĵ��룬ֻ�еȵ����߳̽����˲���ִ�С�
+join -- 等待该线程终止，可以理解为该线程是指的主线程等待子线程的终止。
+        也就是在子线程调用了join()方法后面的代码，只有等到子线程结束了才能执行。
 yield
 
-�߳�ͬ��
+线程同步
 
-������
+互斥锁
 public synchronized void test(){
 	....
 }
 
-����
+死锁
 
-��������İ취: �������������ȣ������������󣩵ȡ�
+解决死锁的办法: 增大锁定的粒度（锁定整个对象）等。
 
-���ή��Ч�ʡ�
+锁会降低效率。
 
-�����ߺ����������⡣
+生产者和消费者问题。
 
-wait: 
-notify ����һ���߳�
+wait:
+notify 叫醒一个线程
 notifyAll
 
-wait �� sleep ������:
-1.wait �� Object ��ķ�����sleep �� Thread ��ķ�����
-2.waitʱ����߳̿��Է����������󣬵���wait������ʱ����������ö���;
-  sleepʱ����̲߳����Է�����������
+wait 和 sleep 的区别:
+1.wait 是 Object 类的方法，sleep 是 Thread 类的方法。
+2.wait时别的线程可以访问锁定对象，调用wait方法的时候必须锁定该对象;
+  sleep时别的线程不可以访问锁定对象。

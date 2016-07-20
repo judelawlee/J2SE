@@ -1,0 +1,55 @@
+
+CountDownLatch
+
+CountDownLatch 是一个同步辅助类，它允许一个或多个线程在其他线程正在执行的操作完成之前一直处于等待（阻塞）状态。
+
+CountDownLatch 是一个同步计数器，构造时传入int参数，该参数就是计数器的初始值，每调用一次countDown()方法，计数器减1，
+计数器大于0时，await()方法会阻塞程序继续执行。
+
+CountDownLatch 是一个倒计数的锁存器，当计数减至0时触发特定的事件。利用这种特性，可以让主线程等待子线程的结束。
+
+一个线程(或者多个)，等待另外N个线程完成某个事情之后才能执行。
+
+public class TestCountDownLatch {
+
+	public static void main(String[] args) throws InterruptedException {
+		CountDownLatch latch = new CountDownLatch(3);
+
+		new Thread(new Worker("aaa", latch)).start();
+		new Thread(new Worker("bbb", latch)).start();
+		new Thread(new Worker("bbb", latch)).start();
+
+		// 调用此方法会一直阻塞当前线程，直到计时器的值为0
+		latch.await();
+
+		System.out.println("the thread [main] is done.");
+	}
+
+	static class Worker implements Runnable {
+		private String name;
+		private CountDownLatch latch;
+
+		public Worker(String name, CountDownLatch latch) {
+			this.name = name;
+			this.latch = latch;
+		}
+
+		@Override
+		public void run() {
+			try {
+				for (int i = 0; i < 10; i++) {
+					System.out.println(this.name + "_" + i);
+					try {
+						TimeUnit.MILLISECONDS.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			} finally {
+				System.out.println("the thread [" + this.name + "] is done.");
+				// 计数器减一，countDown建议放在 finally里执行
+				latch.countDown();
+			}
+		}
+	}
+}

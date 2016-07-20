@@ -1,21 +1,21 @@
 1.用毫秒计算
 
-String date1="1987-01-01";  
-String date2="2010-01-01";  
+String date1="1987-01-01";
+String date2="2010-01-01";
 
-SimpleDateFormat sdf=new SimpleDateFormat("yyyy-mm-dd"); 
-Date d1=sdf.parse(date1);  
-Date d2=sdf.parse(date2);  
-long daysBetween=(d2.getTime()-d1.getTime()+1000000)/(3600*24*1000);  
-System.out.println("1987-01-01 与 2010-01-01 相隔 "+daysBetween+" 天");
+SimpleDateFormat sdf=new SimpleDateFormat("yyyy-mm-dd");
+Date d1=sdf.parse(date1);
+Date d2=sdf.parse(date2);
+long daysBetween=(d2.getTime()-d1.getTime()+1000000)/(3600*24*1000);
+System.out.println("1987-01-01 与 2010-01-01 相隔 " + daysBetween + " 天");
 
 
 2.用Calendar(推荐)
 
-Calendar date = (Calendar) startDate.clone();   
-long daysBetween = 0;   
-while (date.before(endDate)) {         
-	date.add(Calendar.DAY_OF_MONTH, 1);         
-	daysBetween++;      
-}      
-return daysBetween;  
+Calendar date = (Calendar) startDate.clone();
+long daysBetween = 0;
+while (date.before(endDate)) {
+	date.add(Calendar.DAY_OF_MONTH, 1);
+	daysBetween++;
+}
+return daysBetween;
