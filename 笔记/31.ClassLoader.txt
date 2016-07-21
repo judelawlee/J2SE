@@ -1,0 +1,9 @@
+
+ClassLoader 类加载器
+
+ClassLoader用来加载java类到java虚拟机（JVM）中。java源程序经过java编译器后被转换成java字节码（*.class）,
+类加载器负责读取java字节码，并转换城java.lang.Class类的一个实例。每个这样的实例用来表示一个java类。
+
+引导类加载器、扩展类加载器、系统类加载器
+
+串行回收器、并行回收器、并发回收器
