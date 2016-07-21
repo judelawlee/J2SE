@@ -1,0 +1,40 @@
+
+join
+
+主线程生成并启动了子线程，如果子线程里要进行大量的耗时的运算，主线程往往将于子线程之前结束，但是如果主
+线程处理完其他的事务后，需要用到子线程的处理结果，也就是主线程需要等待子线程执行完成之后再结束，这个时
+候就要用到join()方法了。
+
+简单来说，如果主线程需要等待子线程执行完成之后再结束，这个时候就要用到join()方法了。
+
+join的作用是：“等待该线程终止”。需要理解的就是该线程是指的主线程等待子线程的终止。
+也就是在子线程调用了join()方法后面的代码，只有等到子线程结束了才能执行。
+
+public class TestJoin {
+	private static int n = 0;
+
+	public static void main(String[] args) throws InterruptedException {
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for (int i = 0; i < 100; i++) {
+					n++;
+
+					try {
+						Thread.sleep(1);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+
+		t1.start();
+
+		// 要想保证下面的结果输出是在线程执行完成之后，就必须要使用join
+		t1.join();
+
+		// 使用join可以保证结果为100
+		System.out.println("运行结果: n=" + n);
+	}
+}
