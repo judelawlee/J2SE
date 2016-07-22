@@ -20,6 +20,7 @@ volatile关键字用于声明简单类型变量，如int、float、boolean等数
 变量的操作才是原子级别的，如 n=m+1，这个就是原子级别的。所以在使用volatile关键时一定要谨慎，如果自己没有把握，可
 以使用synchronized来代替volatile。
 
+volatile只保证可见性，不保证原子性！
 
 public class TestVolatile {
 	// 加上volatile
