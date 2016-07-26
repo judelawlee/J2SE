@@ -1,29 +1,29 @@
 
-ͨ��Э��ֲ�˼��:
-	Ӧ�ò㡢
-	�����(TCP��UDP��)��
-	�����(IP��)��
-	������(������·��)��
+通信协议分层思想:
+	应用层、
+	传输层(TCP、UDP层)、
+	网络层(IP层)、
+	物理层(数据链路层)。
 
-TCP/IPЭ��
-	
-IP��ַ: �ṩ��һ�޶���IP��ַ��
-	��4���ֽ�����ʾ��ÿ���ֽ��ܹ���������������255��(IPv4)
-	
-	IPv6(��һ����8���ֽ�)
+TCP/IP协议
 
-Socketͨ��
-    TCP��UDP
+IP地址: 提供独一无二的IP地址。
+	由4个字节来表示，每个字节能够代表的最大的数是255。(IPv4)
 
-TCP:�ɿ��ġ�Ч�ʵ͡�
-UDP:���ɿ��ġ�Ч�ʸߡ�
+	IPv6(下一代、8个字节)
 
-java.net.Socket TCP��client��
-java.net.ServerSocket TCP��server��
+Socket通信
+    TCP、UDP
 
-�˿ں�(2���ֽ�,65536���˿�):����ͬһ̨�����ϲ�ͬ��Ӧ�ó���
-�˿ںŷ�ΪTCP�˿ں�UDP�˿ڡ�
+TCP:可靠的、效率低。
+UDP:不可靠的、效率高。
 
-java��1.4�Ժ�������첽ʽ��
+java.net.Socket TCP的client端
+java.net.ServerSocket TCP的server端
 
-UDP������server��client��
+端口号(2个字节,65536个端口):区分同一台机器上不同的应用程序。
+端口号分为TCP端口和UDP端口。
+
+java从1.4以后加入了异步式。
+
+UDP不分区server和client。
