@@ -1,81 +1,84 @@
-jdk: java³ÌÐò¿ª·¢¹¤¾ß°ü£¬°üº¬jre£»
-jre: java³ÌÐòÔËÐÐ»·¾³£»
-jvm: javaÐéÄâ»ú¡£
+jdk: javaç¨‹åºå¼€å‘å·¥å…·åŒ…ï¼ŒåŒ…å«jreï¼›
+jre: javaç¨‹åºè¿è¡ŒçŽ¯å¢ƒï¼›
+jvm: javaè™šæ‹Ÿæœºã€‚
 
 -----------------------------------------------------------------------------------------------
-ÏÂÔØjdk:(sun¹«Ë¾ÒÑ±»oracle¹«Ë¾ÊÕ¹º)
+ä¸‹è½½jdk:(sunå…¬å¸å·²è¢«oracleå…¬å¸æ”¶è´­)
 http://www.oralce.com
 download
 javaSE
 jdk
 
 -----------------------------------------------------------------------------------------------
-ÏµÍ³»·¾³±äÁ¿
-ÐÂ½¨: java_home = D:\jdk
-ÐÂ½¨: classpath = .;D:\jdk\lib
-±à¼­(ÔÚÇ°Ãæ¼ÓÉÏ): path = .;D:\jdk\bin;D:\jdk\lib;
+ç³»ç»ŸçŽ¯å¢ƒå˜é‡
+æ–°å»º: java_home = D:\jdk
+æ–°å»º: classpath = .;D:\jdk\lib
+ç¼–è¾‘(åœ¨å‰é¢åŠ ä¸Š): path = .;D:\jdk\bin;D:\jdk\lib;
 
-ÔÚcmdÏÂÍ¨¹ýÃüÁîÅäÖÃ»·¾³±äÁ¿
+åœ¨cmdä¸‹é€šè¿‡å‘½ä»¤é…ç½®çŽ¯å¢ƒå˜é‡
 D:\>set path=d:\jdk\bin
 D:\>set classpath=d:\jdk\lib
 
 -----------------------------------------------------------------------------------------------
-java¿ª·¢¹¤¾ß
-eclipseÃâ·Ñ -> myeclipseÊÕ·Ñ
-netbeansÃâ·Ñ (sun¹«Ë¾Ö÷ÍÆ)
+javaå¼€å‘å·¥å…·
+eclipseå…è´¹ -> myeclipseæ”¶è´¹
+netbeanså…è´¹ (sunå…¬å¸ä¸»æŽ¨)
 
 -----------------------------------------------------------------------------------------------
---±àÒë
+--ç¼–è¯‘
 javac Hello.java
-Èç¹û´úÂëÀïÓÐ°ü,Èç: package com; ÒªÏÈÊÖ¶¯½¨Ò»¸öcomÎÄ¼þ¼Ð(Èç¹û²»ÊÖ¶¯½¨Á¢comÎÄ¼þ¼Ð£¬Ö±½Ó±àÒëµÄ»°£¬
-±àÒëÕý³££¬µ«Ö´ÐÐµÄÊ±ºò»á³öÏÖÒì³£)£¬±àÒëÃüÁîÎª£ºjava ¨Cd . Hello.java
+å¦‚æžœä»£ç é‡Œæœ‰åŒ…,å¦‚: package com; è¦å…ˆæ‰‹åŠ¨å»ºä¸€ä¸ªcomæ–‡ä»¶å¤¹(å¦‚æžœä¸æ‰‹åŠ¨å»ºç«‹comæ–‡ä»¶å¤¹ï¼Œç›´æŽ¥ç¼–è¯‘çš„è¯ï¼Œ
+ç¼–è¯‘æ­£å¸¸ï¼Œä½†æ‰§è¡Œçš„æ—¶å€™ä¼šå‡ºçŽ°å¼‚å¸¸)ï¼Œç¼–è¯‘å‘½ä»¤ä¸ºï¼šjava â€“d . Hello.java
 
---Ö´ÐÐ
+--æ‰§è¡Œ
 java Hello
-(ÓÐ°üµÄÊ±ºò: java com.Hello)
+(æœ‰åŒ…çš„æ—¶å€™: java com.Hello)
 
---Éú³ÉÎÄµµ(±ØÐëÓÐ¹«¿ªÀàºÍ×¢ÊÍÎÄµµ)
-javadoc ¨Cd test Hello.java
+--ç”Ÿæˆæ–‡æ¡£(å¿…é¡»æœ‰å…¬å¼€ç±»å’Œæ³¨é‡Šæ–‡æ¡£)
+javadoc â€“d test Hello.java
 
---´ò°ü
-1.±àÒë javac Hello.java
-2.´ò°ü jar cvf t.jar Hello.class
-3.ÔËÐÐ java -jar t.jar
+--æ‰“åŒ…
+1.ç¼–è¯‘ javac Hello.java
+2.æ‰“åŒ… jar cvf t.jar Hello.class
+3.è¿è¡Œ java -jar t.jar
 
---ÔËÐÐjar°ü
+--è¿è¡ŒjaråŒ…
 java -classpath ./* com.alibaba.dubbo.container.Main
 java -cp ./* com.alibaba.dubbo.container.Main
-(-classpath¿ÉÒÔ¼òÐ´Îª-cp£¬ÒýÈëjar°ü²»Ö§³Ö*.jarÕâÖÖÍ¨Åä£¬»áÎÞ·¨Æ¥Åä£¬µ«ÊÇ*È´¿ÉÒÔ)
+(-classpathå¯ä»¥ç®€å†™ä¸º-cpï¼Œå¼•å…¥jaråŒ…ä¸æ”¯æŒ*.jarè¿™ç§é€šé…ï¼Œä¼šæ— æ³•åŒ¹é…ï¼Œä½†æ˜¯*å´å¯ä»¥)
 
---²é¿´jdkÖÐµÄ2DÑÝÊ¾
+--è§£åŽ‹waråŒ…
+jar -xvf game.war
+
+--æŸ¥çœ‹jdkä¸­çš„2Dæ¼”ç¤º
 jdk\demo\jfc\java2D>java -jar Java2Demo.jar
 -----------------------------------------------------------------------------------------------
-javaÓïÑÔÓÐÈýÖÖ×¢ÊÍ
-1.µ¥ÐÐ×¢ÊÍ£º // 
+javaè¯­è¨€æœ‰ä¸‰ç§æ³¨é‡Š
+1.å•è¡Œæ³¨é‡Šï¼š // 
 
-2.¶àÐÐ×¢ÊÍ  
+2.å¤šè¡Œæ³¨é‡Š  
 /*
-¡­¡­¡­¡­ 
-¡­¡­¡­¡­ 
+â€¦â€¦â€¦â€¦ 
+â€¦â€¦â€¦â€¦ 
 */
 
-3.ÎÄµµ×¢ÊÍ (ÎÄ¼þ×¢ÊÍ£¬Àà×¢ÊÍ£¬·½·¨×¢ÊÍ)
+3.æ–‡æ¡£æ³¨é‡Š (æ–‡ä»¶æ³¨é‡Šï¼Œç±»æ³¨é‡Šï¼Œæ–¹æ³•æ³¨é‡Š)
 /**
- * ¡­¡­¡­¡­¡­¡­¡­
- * ¡­¡­¡­¡­¡­¡­¡­
+ * â€¦â€¦â€¦â€¦â€¦â€¦â€¦
+ * â€¦â€¦â€¦â€¦â€¦â€¦â€¦
  */
-×¢:ÎÄµµ×¢ÊÍÖÐÖ§³ÖHTML±ê¼Ç¡£
+æ³¨:æ–‡æ¡£æ³¨é‡Šä¸­æ”¯æŒHTMLæ ‡è®°ã€‚
 
 -----------------------------------------------------------------------------------------------
-ÎÄ¼þÃüÃû,ÒªºÍÀàÃûÒ»ÖÂ,½¨ÒéÒ»¸öÎÄ¼þÖÐÖ»ÓÐÒ»¸öÀà¡£
+æ–‡ä»¶å‘½å,è¦å’Œç±»åä¸€è‡´,å»ºè®®ä¸€ä¸ªæ–‡ä»¶ä¸­åªæœ‰ä¸€ä¸ªç±»ã€‚
 
 -----------------------------------------------------------------------------------------------
-C#ºÍJava¶¼ÊÇµ¥¼Ì³ÐµÄ£¨Ö»ÄÜÓÐÒ»¸ö¸¸Àà£©¡£
-C++ÊÇ¶à¼Ì³ÐµÄ¡£
+C#å’ŒJavaéƒ½æ˜¯å•ç»§æ‰¿çš„ï¼ˆåªèƒ½æœ‰ä¸€ä¸ªçˆ¶ç±»ï¼‰ã€‚
+C++æ˜¯å¤šç»§æ‰¿çš„ã€‚
 
 -----------------------------------------------------------------------------------------------
-Java³ÌÐòÏÈÖ´ÐÐ¾²Ì¬´úÂë¶Î£¬ÔÙÖ´ÐÐmain·½·¨¡£
+Javaç¨‹åºå…ˆæ‰§è¡Œé™æ€ä»£ç æ®µï¼Œå†æ‰§è¡Œmainæ–¹æ³•ã€‚
 
 -----------------------------------------------------------------------------------------------
-ÔÚJava³ÌÐòÖÐ£¬Ö»ÓÐlang°ü²»ÓÃµ¼Èë£¬¿ÉÖ±½Óµ÷ÓÃ¡£
+åœ¨Javaç¨‹åºä¸­ï¼Œåªæœ‰langåŒ…ä¸ç”¨å¯¼å…¥ï¼Œå¯ç›´æŽ¥è°ƒç”¨ã€‚
 
