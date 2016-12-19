@@ -6,6 +6,13 @@ jar -cvfe t.jar Test *.class
 jar -cvfe t.jar Test .
 jar -cvfm t.jar a.txt *.class
 
+--查看 hello.jar 包的内容
+jar tvf hello.jar
+
+--解压 hello.jar
+jar xvf hello.jar
+
+
 
 D:\bank\src>javac -d ../classes *.java
 D:\bank\src>jar -cvfe bank.jar Login *.java
@@ -28,8 +35,6 @@ D:\bankmyth1>java -jar bankmyth1.jar
 
 ---------------------------------------------------------------------------------------------------
 
-
-老师讲的：
 系统环境变量
 java_home = e:\jdk
 classpath = .;e:\jdk\lib
@@ -37,7 +42,6 @@ path      = .;e:\jdk\bin;e:\jdk\lib;
 
 
 C:\aaa>java com.H
-
 
 jar -cvfe t.jar Test *.java
 java -jar t.jar
@@ -102,14 +106,14 @@ pause
 批量编译: javac *.java
 
 1.先加个包 package com; 先手动建一个com文件夹；
-  编译:javac -d Test.java
-  执行：java com.Test
+  编译: javac -d Test.java
+  执行: java com.Test
 
 2.javadoc:生成文档
 必须先有公开类，有注释文档
 javadoc -d test Test.java
 
 3.打包命令:jar
-  先编译:javac Test.java
-  执行:jar cvf t.jar Test.class
-  运行:java -jar t.jar
+  先编译: javac Test.java
+  执行: jar cvf t.jar Test.class
+  运行: java -jar t.jar
