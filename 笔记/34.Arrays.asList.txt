@@ -1,0 +1,8 @@
+
+
+Arrays.asList()
+
+Arrays.asList() 得到的 ArrayList 是 Arrays 中的一个内部类(继承了AbstractList), 其中并没有 remove 方法, 
+此 ArrayList 并不是 java.util.ArrayList 的实例。
+
+因此调用 remove 方法时，会报 java.lang.UnsupportedOperationException 异常。
