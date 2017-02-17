@@ -2,12 +2,12 @@
 List接口有一个实例方法List<E> subList(int fromIndex, int toIndex)，其作用是返回一个以fromIndex为起始索引（包含），
 以toIndex为终止索引（不包含）的子列表（List）。
 
-但值得注意的是，返回的这个子列表的幕后其实还是原列表；也就是说，修改这个子列表，将导致原列表也发生改变；反之亦然。 
+但值得注意的是，返回的这个子列表的幕后其实还是原列表; 也就是说，修改这个子列表，将导致原列表也发生改变; 反之亦然。 
 
-ArrayList 的 subList 结果不可强转成 ArrayList，否则会抛出 ClassCastException
-异常： java.util.RandomAccessSubList cannot be cast to java.util.ArrayList ;
-说明： subList 返回的是 ArrayList 的内部类 SubList，并不是 ArrayList ，而是 ArrayList
+ArrayList.subList() 的结果不可强转成 ArrayList，否则会抛出 ClassCastException
+异常: java.util.RandomAccessSubList cannot be cast to java.util.ArrayList ;
+说明: subList 返回的是 ArrayList 的内部类 SubList，并不是 ArrayList ，而是 ArrayList
 的一个视图，对于 SubList 子列表的所有操作最终会反映到原列表上。
 
-在 subList 场景中， 高度注意对原集合元素个数的修改，会导致子列表的遍历、增加、
+在 subList 场景中, 高度注意对原集合元素个数的修改，会导致子列表的遍历、增加、
 删除均产生 ConcurrentModificationException 异常。
