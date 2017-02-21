@@ -117,3 +117,10 @@ javadoc -d test Test.java
   先编译: javac Test.java
   执行: jar cvf t.jar Test.class
   运行: java -jar t.jar
+
+-------------------------------------------------------------------
+用jar命令解压war包:
+jar xvf hospital-service.war
+
+
+
