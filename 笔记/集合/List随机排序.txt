@@ -1,0 +1,17 @@
+
+List随机排序: Collections.shuffle(list);
+
+例:
+List<String> list = Lists.newArrayList();
+list.add("1111");
+list.add("2222");
+list.add("3333");
+list.add("4444");
+list.add("5555");
+
+System.out.println("原list: " + list.toString());
+
+// 随机排序
+Collections.shuffle(list);
+
+System.out.println("随机排序后的list: " + list.toString());
