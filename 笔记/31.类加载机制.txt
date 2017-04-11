@@ -18,4 +18,5 @@ java源程序(*.java)经过java编译器后被转换成java字节码（*.class�
 它根据 Java 应用的类路径(classpath)来加载 Java 类。一般来说，Java 应用的类都是由它来完成加载的。
 可以通过 ClassLoader.getSystemClassLoader() 来获取它。
 
-除了系统提供的类加载器以外，开发人员可以通过继承 java.lang.ClassLoader 类的方式实现自己的类加载器，以满足一些特殊的需求。
+除了系统提供的类加载器以外，开发人员可以通过继承 java.lang.ClassLoader 类的方式实现自己的类加载器，
+以满足一些特殊的需求。
