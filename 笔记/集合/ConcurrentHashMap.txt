@@ -8,8 +8,8 @@ ConcurrentHashMap
 ConcurrentHashMap 是 Java 5 中支持高并发、高吞吐量的线程安全的 HashMap 实现。
 
 ConcurrentHashMap 具体是怎么实现线程安全的呢?
-从 ConcurrentHashMap 代码中可以看出，它引入了一个"分段锁"的概念，具体可以理解为把一个大的Map拆分成N个小
-的 Hashtable，根据 key.hashCode() 来决定把 key 放到哪个 Hashtable 中。在 ConcurrentHashMap 中，
+从 ConcurrentHashMap 代码中可以看出，它引入了一个"分段锁"的概念，具体可以理解为把一个大的Map拆分成
+N个小的 Hashtable，根据 key.hashCode() 来决定把 key 放到哪个 Hashtable 中。在 ConcurrentHashMap 中，
 就是把 Map 分成了N个 Segment（段），put和get的时候，都是先根据key.hashCode()算出放到哪个Segment中。
 
 ConcurrentHashMap 允许多个修改操作并发进行，其关键在于使用了锁分离技术。它使用了多个锁来控制对hash表
