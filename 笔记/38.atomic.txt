@@ -1,11 +1,54 @@
 
 
+atomic
+
+在多线程环境下，无锁的进行原子操作。
+
+atomic包里的类基本都是使用Unsafe实现的包装类，核心操作是CAS原子操作；
+
+CAS(compare and swap)，比较和替换技术，将预期值与当前变量的值比较(compare)，如果相等则使用新值替换(swap)当前
+变量，否则不作操作；另外，需要注意的是CAS操作中的ABA问题，即将预期值与当前变量的值比较的时候，即使相等也不能保
+证变量没有被修改过，因为变量可能由A变成B再变回A，解决该问题，可以给变量增加一个版本号，每次修改变量时版本号自增，
+比较的时候，同时比较变量的值和版本号即可；
+
 java.util.concurrent中提供了atomic原子包，可以实现原子操作(atomic operation)，即在多线程环境中，
 执行的操作不会被其他线程打断。
 
 Java 5 增加了 atomic wrapper classes，主要解决 i++ 非原子性操作的问题。
 对它们的incr之类的操作就不需要sychronized。
 
+
+atomic提供的四种原子更新方式:
+原子方式更新基本类型；
+原子方式更新数组；
+原子方式更新引用；
+原子方式更新字段。
+
+更新基本类型:
+AtomicBoolean，原子更新布尔类型。
+AtomicInteger，原子更新整型。
+AtomicLong，原子更新长整型。
+
+
+更新数组:
+AtomicIntegerArray，原子更新整型数组里的元素。
+AtomicLongArray，原子更新长整型数组里的元素。
+AtomicReferenceArray，原子更新引用类型数组里的元素。
+
+
+更新引用:
+AtomicReference，原子更新引用类型。
+AtomicReferenceFieldUpdater，原子更新引用类型里的字段。
+AtomicMarkableReference，原子更新带有标记位的引用类型。
+
+
+更新字段:
+AtomicIntegerFieldUpdater，原子更新整型字段的更新器。
+AtomicLongFieldUpdater，原子更新长整型字段的更新器。
+AtomicStampedReference，原子更新带有版本号的引用类型，用于解决使用CAS进行原子更新时，可能出现的ABA问题。
+
+
+--------------------------------------------------------------------------------------------------
 
 1.AtomicInteger
 get()
