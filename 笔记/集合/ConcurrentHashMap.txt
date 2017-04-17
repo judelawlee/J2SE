@@ -13,11 +13,11 @@ N个小的 Hashtable，根据 key.hashCode() 来决定把 key 放到哪个 Hasht
 就是把 Map 分成了N个 Segment（段），put和get的时候，都是先根据key.hashCode()算出放到哪个Segment中。
 
 ConcurrentHashMap 允许多个修改操作并发进行，其关键在于使用了锁分离技术。它使用了多个锁来控制对hash表
-的不同部分进行修改。ConcurrentHashMap 内部使用 段(Segment) 来表示这些不同的部分，每个段其实就是一个
+的不同部分进行修改。ConcurrentHashMap 内部使用 "段(Segment)" 来表示这些不同的部分，每个段其实就是一个
 小的 Hashtable，它们有自己的锁。只要多个修改操作发生在不同的段上，它们就可以并发进行。
 
-有些方法需要跨段，比如size()和containsValue()，它们可能需要锁定整个Map而不仅仅是某个段，这需要按顺序锁定
-所有段，操作完毕后，又按顺序释放所有段的锁。
+有些方法需要跨段，比如 size() 和 containsValue()，它们可能需要锁定整个Map而不仅仅是某个段，这需要按顺
+序锁定所有段，操作完毕后，又按顺序释放所有段的锁。
 
 ConcurrentHashMap 允许多个读操作并发进行，读操作并不需要加锁。
 
