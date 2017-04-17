@@ -1,0 +1,25 @@
+
+
+java.util.concurrent中提供了atomic原子包，可以实现原子操作(atomic operation)，即在多线程环境中，
+执行的操作不会被其他线程打断。
+
+Java 5 增加了 atomic wrapper classes，主要解决 i++ 非原子性操作的问题。
+对它们的incr之类的操作就不需要sychronized。
+
+
+1.AtomicInteger
+get()
+set(int newValue)
+getAndSet(int newValue)
+compareAndSet(int expect, int update)
+incrementAndGet()
+
+
+2.AtomicLong
+
+
+3.AtomicBoolean
+compareAndSet(boolean expect, boolean update)
+set(boolean newValue)
+get()
+
