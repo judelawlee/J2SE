@@ -1,16 +1,16 @@
 
 volatile
 
-volatile 用在多线程，同步变量。线程为了提高效率，将某成员变量(如A)拷贝了一份（如B），线程中对A的访问其实访问的是B。
+volatile 用在多线程，同步变量。线程为了提高效率，将某成员变量(如A)拷贝了一份(如B)，线程中对A的访问其实访问的是B。
 只在某些动作时才进行A和B的同步。因此存在A和B不一致的情况。volatile就是用来避免这种情况的。
 
-volatile 告诉jvm， 它所修饰的变量不保留拷贝，直接访问主内存中的（也就是上面说的A)。
+volatile 所修饰的变量不保留拷贝，直接访问主内存中的(也就是上面说的A)。
 
-volatile 一般情况下不能代替 sychronized，因为volatile不能保证操作的原子性，即使只是i++，实际上也是由多个原子操作
-组成：read i; inc; write i，假如多个线程同时执行i++，volatile只能保证他们操作的i是同一块内存，但依然可能出现写入
+volatile 一般情况下不能代替 sychronized，因为 volatile 不能保证操作的原子性，即使只是i++，实际上也是由多个原子操作
+组成: read i; inc; write i，假如多个线程同时执行i++，volatile只能保证他们操作的i是同一块内存，但依然可能出现写入
 脏数据的情况。如果配合Java 5增加的 atomic wrapper classes，对它们的increase之类的操作就不需要sychronized。
 
-volatile是变量修饰符，而synchronized则作用于一段代码或方法。
+volatile是变量修饰符，而 synchronized 作用于一段代码或方法。
 
 volatile关键字用于声明简单类型变量，如int、float、boolean等数据类型。
 如果这些简单数据类型声明为volatile，对它们的操作就会变成原子级别的。
