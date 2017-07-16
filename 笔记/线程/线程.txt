@@ -14,5 +14,25 @@ Thread.yield() 方法会使该线程释放对cpu目前的占用，方便其他�
 
 join()方法是会让执行该方法的线程一直执行完run()方法后，程序才会继续往下执行。
 
+stop()方法会让线程戛然而止，不安全，没有进行线程停止后的数据处理收尾工作。
+
+如何正确的停止线程? 设置退出标志。volatile boolean keepRunning = true;
+
+interrupt() 初衷并不是停止线程。
+
+interrupt方法是用来唤醒被阻塞的线程的，如果线程使用了 wait、sleep、join 方法，那么线程就
+会进入阻塞状态，使用interrupt方法会终止这种状态，此时线程的sleep等方法下面的catch语句就会
+接收到这个打断，从而启动线程，继续做要做的事情。
+
+如果线程在阻塞之前使用interrupt方法，那么再阻塞的时候(调用wait、sleep、join)，会抛出异常，
+并把中断标志位设置成false。
+
+线程1由于sleep、join等方法进入阻塞状态，其他线程（主线程）运行中调用线程1的interrupt方法，
+使得线程1的中断标志置为true，此时线程1的sleep或join等方法检测到其中断标志位为true，抛出
+中断异常停止阻塞状态清空中断标志即置为false，因此，无法停止线程。
+
+
+
+http://www.cnblogs.com/riskyer/p/3263032.html
 
 
