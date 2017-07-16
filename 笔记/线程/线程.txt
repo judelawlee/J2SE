@@ -14,11 +14,23 @@ Thread.yield() 方法会使该线程释放对cpu目前的占用，方便其他�
 
 join()方法是会让执行该方法的线程一直执行完run()方法后，程序才会继续往下执行。
 
-stop()方法会让线程戛然而止，不安全，没有进行线程停止后的数据处理收尾工作。
+
+线程常用方法
+1.获取线程名称: getName();
+2.取得当前线程对象: currentThread();
+3.判断是否启动: isAlive();
+4.强行运行: join();
+5.线程休眠: sleep();
+6.线程礼让: yield();
+
+-------------------------------------------------------------------------------------------------
+停止线程
+
+1.stop()方法会让线程戛然而止，不安全，没有进行线程停止后的数据处理收尾工作。
 
 如何正确的停止线程? 设置退出标志。volatile boolean keepRunning = true;
 
-interrupt() 初衷并不是停止线程。
+2.interrupt() 初衷并不是停止线程。
 
 interrupt方法是用来唤醒被阻塞的线程的，如果线程使用了 wait、sleep、join 方法，那么线程就
 会进入阻塞状态，使用interrupt方法会终止这种状态，此时线程的sleep等方法下面的catch语句就会
@@ -27,12 +39,81 @@ interrupt方法是用来唤醒被阻塞的线程的，如果线程使用了 wait
 如果线程在阻塞之前使用interrupt方法，那么再阻塞的时候(调用wait、sleep、join)，会抛出异常，
 并把中断标志位设置成false。
 
-线程1由于sleep、join等方法进入阻塞状态，其他线程（主线程）运行中调用线程1的interrupt方法，
+线程1由于sleep、join等方法进入阻塞状态，其他线程(主线程)运行中调用线程1的interrupt方法，
 使得线程1的中断标志置为true，此时线程1的sleep或join等方法检测到其中断标志位为true，抛出
 中断异常停止阻塞状态清空中断标志即置为false，因此，无法停止线程。
 
-
-
 http://www.cnblogs.com/riskyer/p/3263032.html
+
+-------------------------------------------------------------------------------------------------
+线程交互——互斥与同步
+
+1.争用条件
+当多个线程同时共享访问同一数据(内存区域)时，每个线程都尝试操作该数据，从而导致数据被破坏(corrupted)，
+这种现象称为"争用条件"(Race condition)。
+
+线程争用资源时会破坏数据，该过程发生在数据从jvm内存写入堆内存的时候。
+
+原因是: 每个线程在操作数据时，会先将数据初值读取到自己获得的内存中，然后在内存中进行运算后，重新赋值
+到数据。 例如: 线程1在还未重新将值赋回去时，线程1阻塞，线程2开始访问该数据，然后进行了修改，之后被阻
+塞的线程1再获得资源，而将之前计算的值覆盖掉线程2所修改的值，就出现了数据丢失情况。
+
+
+2.互斥:
+同一时间只能有一条线程对临界区(关键数据)进行操作。
+
+同步:
+同步是线程间的一种通信机制，线程A做完某件事后，通知线程B它做完了。
+
+实现互斥(通过synchronized关键字实现):
+Object lockObj = new Object();
+lockObj.wait(); //等待
+lockObj.notifyAll(); //唤醒所有在锁对象上等待的线程。
+
+synchronized(lockObj){  //将lockObj锁定起来，只有持有lockObj的线程才能访问同步代码
+    //需要互斥操作的代码
+    //...
+}
+
+实现同步:
+wait()/notify()/notifyAll()，都是Object对象的方法。
+
+wait()，将当前线程放入 Wait Set，并释放锁。
+notify()，从 Wait Set 中唤醒某一线程(随机获取Wait Set中的某一线程，无法控制)，进入竞争队列。
+notifyAll()，唤醒 Wait Set 中的所有线程，进入竞争队列。
+
+-------------------------------------------------------------------------------------------------
+Java内存模型:
+JMM描述了Java线程如何通过内存进行交互
+happens-before
+synchronized & volatile & final
+
+并发编程工具:
+java.util.concurrent
+线程池 ExecutorService
+Callable & Future
+BlockingQueue
+
+多线程编程常用的交互模型:
+Producer-Consumer 模型
+Read-Write Lock 模型
+Future 模型
+Worker Thread 模型
+
+线程安全:
+原子性与可见性
+java.util.concurrent.atomic
+synchronized & volatile
+DeadLocks 死锁
+
+Locks & Condition
+Java锁机制和等待条件的高层实现
+java.util.concurrent.locks
+
+
+
+
+
+
 
 
