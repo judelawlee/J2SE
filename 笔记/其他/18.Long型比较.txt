@@ -4,11 +4,11 @@ Long 类型是 java.util.Lang 对象，而不是基本类型 long .
 如果比较两个Long对象值是否相等，不可以使用双等号进行比较，可以采用如下方式:
 
 1. 使用 equals 方法
-        Long a = new Long(3);
-        Long b = new Long(3);
-        System.out.println(a.equals(b));
+Long a = new Long(3);
+Long b = new Long(3);
+System.out.println(a.equals(b));
 
 2. 使用 Long 类型中的 longValue() 方法进行比较，如
-        Long a = new Long(3);
-        Long b = new Long(3);
-        System.out.println(a.longValue() == b.longValue());
+Long a = new Long(3);
+Long b = new Long(3);
+System.out.println(a.longValue() == b.longValue());

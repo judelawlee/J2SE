@@ -1,3 +1,4 @@
+
 Java1.5提供了一个叫varargs的功能，就是可变长度的参数。
 
 有点类似于main方法的参数String[] args，我们在命令行运行时args的个数是可变的。
