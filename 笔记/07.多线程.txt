@@ -1,169 +1,111 @@
-多线程:多线程让计算机在同一时间段并行处理多个不同的任务。
 
-*进程是指运行中的应用程序，每个进程都有自己独立的内存空间，一个应用程序可以同时启动多个进程。
-*线程是指进程中的一个执行流程，一个进程可以由多个线程组成。
-*多线程是实现并发机制的一种有效手段。
-*多线程的目的是为了最大限度的利用CPU资源。
-*进程和线程都是实现并发性的一个基本单位。
-*线程是进程内的可执行单元。
-*每个进程都有一段专用的内存区域，线程却是共享所在进程的内存单元。
-*线程安全。
+多线程
 
-创建线程的两种方式:
-1）定义Thread类的子类，覆盖Thread类的run()方法，然后创建该子类的实例。
-2）定义实现Runnable接口的类，实现接口的run()方法，然后将这个类的实例作为Thread的构造方法的参数，
-   创建Thread类的实例。
+多线程让计算机在同一时间段并行处理多个不同的任务，是实现并发机制的一种有效手段，目的是为了最大
+限度的利用CPU资源。
 
-Thread与Runnable的关系:Thread实现了Runnable的run()方法。
+注意:
+1.进程是指运行中的应用程序，每个进程都有自己独立的内存空间，一个应用程序可以同时启动多个进程。
+2.线程是指进程中的一个执行流程，一个进程可以由多个线程组成。
+3.进程和线程都是实现并发性的一个基本单位。
+4.线程是进程内的可执行单元。
+5.每个进程都有一段专用的内存区域，线程却是共享所在进程的内存单元。
+6.线程安全。
 
-线程的优先级:
+--------------------------------------------------------------------------------------------------
+创建线程
+
+有两种方式:
+1)继承 Thread 类，覆盖 run() 方法，创建子类的实例。
+2)实现 Runnable 接口，实现 run() 方法，然后将这个类的实例作为Thread的构造方法的参数，创建Thread类的实例。
+(注: Thread 实现了 Runnable 的 run() 方法。)
+
+推荐使用Runnable接口。
+
+--------------------------------------------------------------------------------------------------
+线程优先级
+
 在Thread类中有三个设置线程优先级的静态整型常量:
 MAX_PRIORITY: 最大优先级，10;
 MIN_PRIORITY: 最小优先级，1;
-NORM_PRIORITY: 标准（普通）优先级，5。
+NORM_PRIORITY: 标准(普通)优先级，5。
 
-线程的生命周期:
-  1）新建状态，new;
-  2）就绪状态，start();
-  3）运行状态，run();
-  4）堵塞状态，sleep()、suspend()、wait();
-  5）终止状态，stop()，当线程执行完run()方法，它将自然终止运行。
+线程默认优先级是5。
 
+设置线程优先级
+Thread t = new MyThread();
+t.setPriority(8);
+t.start();
 
-继承Thread类:
-class MThread extends Thread {
-	public MThread(String s){
-		super(s);
-	}
-    public void run(){
-		for(int i=0;i<10;i++){
-			System.out.println(" "+this.getName());  //输出线程的名字
-			try{
-				sleep(500);  //休眠0.5秒
-				//sleep((int)(Math.random()*500));  //休眠0到0.5秒
-			}catch(Exception e){
-				return;
-			}
-		}
-	}
-}
+线程优先级为1~10之间的正整数，JVM从不会改变一个线程的优先级。然而，1~10之间的值是没有保证的。
 
-public class  ThreadDemo{
-	public static void main(String[] args) {
-		System.out.println(Thread.currentThread().getName());  //main,返回对当前正在执行的线程的名字
-	    System.out.println(Thread.activeCount());  //1,返回当前线程的线程组中活动线程的数目
-		MThread no=new MThread("No");
-		MThread yes=new MThread("Yes");
-		System.out.println(no.getPriority());  //5,得到no的优先级
-		System.out.println(yes.getPriority());
-		no.start();
-		System.out.println(Thread.activeCount());  //2
-		yes.start();
-		System.out.println(Thread.activeCount());  //3
-	}
-}
+--------------------------------------------------------------------------------------------------
+线程的生命周期
 
+1)新建状态，new
+线程对象已经创建，还没有在其上调用start()方法。
 
-实现Runnable接口:
-public class MyThread extends Thread {
-	public static void main(String[] args) {
-		Thread t1=new Thread01("one");
-		Thread t3=new Thread01("three");
-		Thread t2=new Thread(new Thread02("two"));
-		t2.setName("two");
-		t1.start();
-		t2.start();
-		t3.start();
-	}
-}
+2)就绪状态(可运行状态)，start()
+当线程有资格运行，但调度程序还没有把它选定为运行线程时线程所处的状态。调用start()方法时，线程首先进入
+可运行状态。在线程运行之后或者从阻塞、等待或睡眠状态回来后，也返回到可运行状态。
 
-class Thread01 extends Thread {
-	private String str;
-	public Thread01(String s){
-		this.str=s;
-	}
-	public void run(){
-		this.setName(str);
-		try{
-			for (int i = 0; i < 10; i++) {
-			    Thread.sleep(1000);
-				System.out.println(this.getName()+":"+i);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-}
+3)运行状态，run()
+线程调度程序从可运行池中选择一个线程作为当前线程时线程所处的状态。这也是线程进入运行状态的唯一一种方式。
 
-class Thread02 implements Runnable {
-    private String str;
-	public Thread02(String s){
-		this.str=s;
-	}
-	public void run(){
-		try{
-			for (int i = 0; i < 10; i++) {
-			    Thread.sleep(1000);
-				System.out.println(Thread.currentThread().getName()+":"+i);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-}
+4)堵塞状态，sleep()/suspend()/wait()
+这是线程有资格运行时它所处的状态。特点是: 线程仍旧是活的，但是当前没有条件运行。换句话说，它是可运行的，
+如果某件事件出现，他可能返回到可运行状态。
+
+5)终止状态，stop()
+当线程执行完run()方法，它将自然终止运行。这个线程对象也许是活的，但是它已经不是一个单独执行的线程。线
+程一旦死亡，就不能复生。如果在一个死去的线程上调用start()方法，会抛出java.lang.IllegalThreadStateException
+异常。
+
+--------------------------------------------------------------------------------------------------
+线程栈
+
+线程栈是指某时刻内存中线程调度的栈信息，当前调用的方法总是位于栈顶。线程栈的内容是随着程序的运行动
+态变化的，因此研究线程栈必须选择一个运行的时刻(实际上指代码运行到什么地方)。
+
+--------------------------------------------------------------------------------------------------
+线程睡眠 sleep (静态方法)
+
+Thread.sleep(long millis)
+Thread.sleep(long millis, int nanos)
+
+强制当前正在执行的线程休眠(暂停执行)，以"减慢线程"。当睡眠时间到期，线程返回到可运行状态。
+为了让其他线程有机会执行，可以将 Thread.sleep() 的调用放在线程run()之内。
+
+注意:
+1.线程睡眠是帮助所有线程获得运行机会的最好方法。
+2.线程睡眠到期自动苏醒，并返回到可运行状态，不是运行状态。sleep()中指定的时间是线程不会运行的最短时间。
+因此，sleep()方法不能保证该线程睡眠到期后就开始执行。
+3.Thread.sleep()是静态方法，只能控制当前正在运行的线程。
+
+--------------------------------------------------------------------------------------------------
+线程让步 yield (静态方法)
+
+Thread.yield()
+
+暂停当前正在执行的线程对象，并执行其他线程。
+
+线程总是存在优先级，优先级范围在1~10之间。JVM线程调度程序是基于优先级的抢先调度机制。在大多数情况下，
+当前运行的线程优先级将大于或等于线程池中任何线程的优先级。但这仅仅是大多数情况。(注意，当设计多线程
+应用程序的时候，一定不要依赖于线程的优先级，因为线程调度优先级操作是没有保障的。)
+
+当线程池中线程都具有相同的优先级，JVM调度程序自由选择它喜欢的线程。这时候调度程序的操作有两种可能:
+一是选择一个线程运行，直到它阻塞或者运行完成为止。
+二是时间分片，为池内的每个线程提供均等的运行机会。
+
+Thread.yield()将导致线程从运行状态转到可运行状态，但有可能没有效果。
+
+--------------------------------------------------------------------------------------------------
+线程加入 join (非静态方法)
+
+等待该线程终止，可以理解为该线程是指的主线程等待子线程的终止。
+也就是在子线程调用了join()方法后面的代码，只有等到子线程结束了才能执行。
+
+join()将导致线程栈发生变化，当然这些变化都是瞬时的。
 
 
-线程的同步: synchronized
-定义线程同步的机制是 synchronized 关键字，
-它包括两种用法: synchronized 方法和 synchronized 块。
 
-Timer、TimerTask
-import java.util.*;
-public class TimerDemo {
-	public static void main(String[] args) {
-		TimerTask tt=new TimerTask(){
-			public void run(){
-				System.out.println("欢迎你");
-				System.exit(0);
-			}
-		};
-		Timer t=new Timer();
-		t.schedule(tt,5000);  //延迟5秒执行
-	}
-}
-
-
-线程是一个程序里不同的执行路径。
-进程是一个静态的概念。
-优先使用Runnable接口。
-
-start
-sleep
-run
-join -- 等待该线程终止，可以理解为该线程是指的主线程等待子线程的终止。
-        也就是在子线程调用了join()方法后面的代码，只有等到子线程结束了才能执行。
-yield
-
-线程同步
-
-互斥锁
-public synchronized void test(){
-	....
-}
-
-死锁
-
-解决死锁的办法: 增大锁定的粒度（锁定整个对象）等。
-
-锁会降低效率。
-
-生产者和消费者问题。
-
-wait:
-notify 叫醒一个线程
-notifyAll
-
-wait 和 sleep 的区别:
-1.wait 是 Object 类的方法，sleep 是 Thread 类的方法。
-2.wait时别的线程可以访问锁定对象，调用wait方法的时候必须锁定该对象;
-  sleep时别的线程不可以访问锁定对象。

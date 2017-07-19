@@ -1,5 +1,19 @@
 
-import java.util.TimerTask;
+1.
+public class TimerDemo {
+	public static void main(String[] args) {
+		TimerTask tt=new TimerTask(){
+			public void run(){
+				System.out.println("ª∂”≠ƒ„");
+				System.exit(0);
+			}
+		};
+		Timer t=new Timer();
+		t.schedule(tt,5000);  //—”≥Ÿ5√Î÷¥––
+	}
+}
+
+2.
 public class MyTask1 extends TimerTask {
 
 	@Override
