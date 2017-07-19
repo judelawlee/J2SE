@@ -1,191 +1,222 @@
-Êı¾İ×ª»»£º
-    short a=0; 
-    a=a+1; //ÕâÊÇÓĞ´íµÄ£¬ÒòÎª1ÊÇintĞÍµÄ
-    a+=1;  
 
-»ù±¾Êı¾İÀàĞÍ(Ô­Ê¼ĞÍÊı¾İÀàĞÍ):byte short int long float double boolean char  8ÖÖ£»
-ÕûĞÍÓĞ:short¡¢int¡¢long;
-Ô­Ê¼ĞÍÊı¾İÀàĞÍºÍÒıÓÃĞÍÊı¾İÀàĞÍµÄÈ±Ê¡Öµ²»Í¬¡£
+æ•°æ®è½¬æ¢
 
-char¿ÉÒÔ´æ´¢Ò»¸öºº×Ö£¬Èç:
-    char c = '¹ú';
-    System.out.println(c);
+short a = 0; 
+a = a+1; // è¿™æ˜¯æœ‰é”™çš„ï¼Œå› ä¸º1æ˜¯intå‹çš„
+a += 1;  
+
+åŸºæœ¬æ•°æ®ç±»å‹(åŸå§‹å‹æ•°æ®ç±»å‹): byte short int long float double boolean char, å…±8ç§
+æ•´å‹æœ‰: short int long
+
+åŸå§‹å‹æ•°æ®ç±»å‹å’Œå¼•ç”¨å‹æ•°æ®ç±»å‹çš„ç¼ºçœå€¼ä¸åŒã€‚
+
+charå¯ä»¥å­˜å‚¨ä¸€ä¸ªæ±‰å­—ï¼Œå¦‚:
+char c = 'å›½';
+System.out.println(c);
+
 ------------------------------------------------------------------------------------
-if-elseÓï¾ä£º
-    if(i%2!=0){
-        System.out.println(i+"²»ÄÜ±»2Õû³ı");
-    }else{
-        System.out.println(i+"ÄÜ±»2Õû³ı");
+if-elseè¯­å¥
+
+if(i%2 != 0){
+    System.out.println(i + "ä¸èƒ½è¢«2æ•´é™¤");
+}else{
+    System.out.println(i + "èƒ½è¢«2æ•´é™¤");
+}
+
+------------------------------------------------------------------------------------
+switchè¯­å¥
+
+for(int i=0;i<10;i++){
+    switch(i){
+        case 0: System.out.println("0"); break;
+        case 1: System.out.println("1"); break;
+        case 2: System.out.println("2"); break;
+        case 3: System.out.println("3"); break;
+        case 4: System.out.println("4"); break;
+        default: System.out.println("5.....");
     }
+}
+
 ------------------------------------------------------------------------------------
-switchÓï¾ä£º
-     for(int i=0;i<10;i++){
-       switch(i){
-            case 0: System.out.println("0"); break;
-            case 1: System.out.println("1"); break;
-            case 2: System.out.println("2"); break;
-            case 3: System.out.println("3"); break;
-            case 4: System.out.println("4"); break;
-            default: System.out.println("5.....");
-       }
-     }
+whileè¯­å¥
+
+int i=10;
+while(i>0){
+    System.out.println("Hello" + i);
+    i--; 
+}
+
+æ³¨: åœ¨Javaé‡Œ while(1){} ä¸æ˜¯æ­»å¾ªç¯ï¼Œä¼šå‡ºé”™ï¼Œå› ä¸ºJavaä¸èƒ½è¯†åˆ«1ä¸ºtrueã€‚
+
 ------------------------------------------------------------------------------------
-whileÓï¾ä:
-    int i=10;
-    while(i>0){
-	System.out.println("Hello"+i);
-	i--; 
-    }
-×¢£ºÔÚJavaÀïwhile(1){}²»ÊÇËÀÑ­»·£¬»á³ö´í£¬ÒòÎªJava²»ÄÜÊ¶±ğ1Îªtrue¡£
+do-whileè¯­å¥
+
+int n = 10;
+do{
+    System.out.println("Hello" + n);
+    n--;
+}while(n>0);
+
 ------------------------------------------------------------------------------------
-do-whileÓï¾ä:
-   int n=10;
-   do{
-   	System.out.println("Hello"+n);
-   	n--;
-   }while(n>0);
+forè¯­å¥:
+
+for(int i=1; i<10; i++){
+    System.out.println(i);
+}
+
+æ³¨: for( ; ; ){ ... }
+
 ------------------------------------------------------------------------------------
-forÓï¾ä:
-   for(int i=1;i<10;i++){
-      System.out.println(i);
-   }
-×¢£ºfor( ; ; ){...}
+foreachè¯­å¥:
+
+int[] nums = {1,2,3,4,5,6,7,8,9};
+for(int x : nums){
+    System.out.println("Helloï¼Œ" + x);
+}
+
 ------------------------------------------------------------------------------------
-foreachÓï¾ä:
-   int[] nums={1,2,3,4,5,6,7,8,9};
-   for(int x : nums){
-      System.out.println("Hello"+x);
-   }
+continue ç»“æŸæœ¬æ¬¡å¾ªç¯ï¼Œæ¡ä»¶å…è®¸ï¼Œå¼€å§‹ä¸‹æ¬¡å¾ªç¯
+break ç»ˆæ­¢å¾ªç¯
+
 ------------------------------------------------------------------------------------
-continue½áÊø±¾´ÎÑ­»·£¬Ìõ¼şÔÊĞí£¬¿ªÊ¼ÏÂ´ÎÑ­»·
-breakÖÕÖ¹Ñ­»·
-------------------------------------------------------------------------------------
-¿ØÖÆÌ¨ÖĞÈıÖÖ³£ÓÃµÄÊäÈë·½·¨:
+æ§åˆ¶å°ä¸­ä¸‰ç§å¸¸ç”¨çš„è¾“å…¥æ–¹æ³•:
+
 1.
 import java.util.Scanner;
 
-System.out.print("ÇëÊäÈëÒ»¸öÊı£º");
+System.out.print("è¯·è¾“å…¥ä¸€ä¸ªæ•°:");
 Scanner sc=new Scanner(System.in);
-System.out.println("ÄãÊäÈëµÄÊı×ÖÎª£º"+sc.nextLine());
+System.out.println("ä½ è¾“å…¥çš„æ•°å­—ä¸º:" + sc.nextLine());
 
 2.
 import java.io.*;
 
 try{
-    BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-    System.out.print("ÇëÊäÈëÄãµÄĞÕÃû£º");
-    String str=br.readLine();
-    System.out.println("»¶Ó­"+str);
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    System.out.print("è¯·è¾“å…¥ä½ çš„å§“å:");
+    String str = br.readLine();
+    System.out.println("æ¬¢è¿" + str);
 }catch(Exception e){
 }
 
-3.´ËÖÖ·½·¨±È½Ï°²È«£¬½¨ÒéÊ¹ÓÃÕâÖÖ·½·¨¡£
+3.(æ­¤ç§æ–¹æ³•æ¯”è¾ƒå®‰å…¨ï¼Œå»ºè®®ä½¿ç”¨è¿™ç§æ–¹æ³•)
 import java.io.*;
 
-Console c=System.console();
-String uname=new String(c.readLine("ÇëÊäÈëÄãµÄÓÃ»§Ãû£º"));
-String upwd=new String(c.readPassword("ÇëÊäÈëÄãµÄÃÜÂë£º"));
-System.out.println("»¶Ó­"+uname+"\nÄãµÄÃÜÂëÊÇ:"+upwd);
+Console c = System.console();
+String uname = new String(c.readLine("è¯·è¾“å…¥ä½ çš„ç”¨æˆ·å:"));
+String upwd = new String(c.readPassword("è¯·è¾“å…¥ä½ çš„å¯†ç :"));
+System.out.println("æ¬¢è¿" + uname + "\nä½ çš„å¯†ç æ˜¯:" + upwd);
+
 ------------------------------------------------------------------------------------
-Éú³ÉËæ»úÊı£ºRandom£¨£©,Ğèµ¼Èëimport java.util.*;
-//Éú³É´Óaµ½bµÄËæ»úÊı£º
-Random r=new Random();  
-int a=r.nextInt(b-a+1)+a;
+ç”Ÿæˆéšæœºæ•°:Random(),éœ€å¯¼å…¥ import java.util.*;
+//ç”Ÿæˆä»aåˆ°bçš„éšæœºæ•°:
+Random r = new Random();  
+int a = r.nextInt(b-a+1) + a;
+
 ------------------------------------------------------------------------------------
-Êı×é:
-int[] a=new int[10];
-int[] a=new int[]{1,2,3,4,5,6,7,8,9};
-int[] a={1,2,3,4,5,6,7,8,8};
+æ•°ç»„
 
-ÇóÊı×éµÄ´óĞ¡£ºa.length,lengthÊÇÊôĞÔ£»µ«ÊÇÔÚÇó×Ö·û´®StringµÄ³¤¶ÈµÄÊ±ºò£¬
-              lengthÊÇÒ»¸ö·½·¨£¬ÒªÕâÑùÊ¹ÓÃ£ºstr.length()¡£
+int[] a = new int[10];
+int[] a = new int[]{1,2,3,4,5,6,7,8,9};
+int[] a = {1,2,3,4,5,6,7,8,8};
 
-µ÷ÓÃ: a[i];
+æ±‚æ•°ç»„çš„å¤§å°: a.length, lengthæ˜¯å±æ€§; ä½†æ˜¯åœ¨è·å–å­—ç¬¦ä¸²Stringçš„é•¿åº¦çš„æ—¶å€™ï¼Œlength() æ˜¯ä¸€ä¸ªæ–¹æ³•ã€‚
 
-javaÖĞÊı×éµÄÏÂ±ê´ÓÁã¿ªÊ¼£¬List¼¯ºÏµÄÏÂ±êÒ²ÊÇ´ÓÁã¿ªÊ¼¡£
+è°ƒç”¨: a[i];
+
+javaä¸­æ•°ç»„çš„ä¸‹æ ‡ä»é›¶å¼€å§‹ï¼ŒListé›†åˆçš„ä¸‹æ ‡ä¹Ÿæ˜¯ä»é›¶å¼€å§‹ã€‚
+
 ------------------------------------------------------------------------------------
-¶àÎ¬Êı×é:
-×¢:ÔÚjavaÖĞ£¬Êı×é¿Õ¼ä²»ÊÇÁ¬Ğø·ÖÅäµÄ£¬ËùÒÔ²»ÒªÇó¶şÎ¬Êı×éµÄÃ¿Ò»Î¬µÄ´óĞ¡ÏàÍ¬¡£
-int[][] a=new int[3][3];
-int[][] a={{1,2,3},{4,5,6},{7,8,9}};
+å¤šç»´æ•°ç»„
 
-µ÷ÓÃ: a[i][j]¡£
+æ³¨: åœ¨javaä¸­ï¼Œæ•°ç»„ç©ºé—´ä¸æ˜¯è¿ç»­åˆ†é…çš„ï¼Œæ‰€ä»¥ä¸è¦æ±‚äºŒç»´æ•°ç»„çš„æ¯ä¸€ç»´çš„å¤§å°ç›¸åŒã€‚
 
-Êı×éµÄ±éÀú:
-Ò»Î¬Êı×éµÄ±éÀú:¼ûÉÏÃæµÄforeachÓï¾ä¡£
-¶şÎ¬Êı×éµÄ±éÀú:
+int[][] a = new int[3][3];
+int[][] a = {{1,2,3},{4,5,6},{7,8,9}};
+
+è°ƒç”¨: a[i][j]ã€‚
+
+æ•°ç»„çš„éå†:
+ä¸€ç»´æ•°ç»„çš„éå†: è§ä¸Šé¢çš„foreachè¯­å¥ã€‚
+
+äºŒç»´æ•°ç»„çš„éå†:
 int[][] num = {{1,2,3},{4,5,6},{7,8,9}};
-for(int m=0;m<num.length;m++){
-    for(int n=0;n<num[m].length;n++){
+for(int m=0; m<num.length; m++){
+    for(int n=0; n<num[m].length; n++){
         System.out.print(num[m][n]+"\t");
     }
 }
 
-²»¹ÜÒ»Î¬»¹ÊÇ¶şÎ¬£¬ÔÚÊ¹ÓÃÇ°£¨¸³Öµ¡¢·ÃÎÊ£©±ØĞë³õÊ¼»¯£¬¿ÉÒÔÓÃnewÄ¬ÈÏ³õÊ¼»¯£¬Ò²¿ÉÒÔÓÃÊı×é³£Á¿³õÊ¼»¯¡£
-------------------------------------------------------------------------------------
-µİ¹é:£¨·½·¨ÄÚ²¿µ÷ÓÃ×Ô¼º£©
-Çó½×³Ë£º
-	public static int getJieCheng(int num){
-	     if(num<=1){
-		    return 1;
-	     }else{
-		    return getJieCheng(num-1)*num;
-	     }
-	}
+ä¸ç®¡ä¸€ç»´è¿˜æ˜¯äºŒç»´ï¼Œåœ¨ä½¿ç”¨å‰(èµ‹å€¼ã€è®¿é—®)å¿…é¡»åˆå§‹åŒ–ï¼Œå¯ä»¥ç”¨newé»˜è®¤åˆå§‹åŒ–ï¼Œä¹Ÿå¯ä»¥ç”¨æ•°ç»„å¸¸é‡åˆå§‹åŒ–ã€‚
 
-Êä³ö·Æ²¨ÄÉÎ÷ÊıÁĞ:
-       public static long f(int n){
-		if(n==1||n==2){
-			return 1;
-		}else{
-			return f(n-1)+f(n-2);
-		}
-       }
 ------------------------------------------------------------------------------------
-Òì³£:
-Òì³£Óï¾äµÄ¼¸ÖÖĞÎÊ½:
-1.try{¡­}catch(Exception e){¡­}
+é€’å½’(æ–¹æ³•å†…éƒ¨è°ƒç”¨è‡ªå·±)
 
-2.try{¡­}catch(Exception e){¡­}finally{¡­}
-×¢:Ê¹ÓÃfinallyÊ±£¬²»ÂÛ³ÌĞòÓĞÎŞÒì³£·¢Éú£¬×îÖÕ¶¼»áÖ´ĞĞfinallyÓï¾ä¡£
+æ±‚é˜¶ä¹˜:
+public static int getJieCheng(int num){
+     if(num<=1){
+	    return 1;
+     }else{
+	    return getJieCheng(num-1)*num;
+     }
+}
+
+è¾“å‡ºè²æ³¢çº³è¥¿æ•°åˆ—:
+public static long f(int n){
+    if(n==1||n==2){
+	return 1;
+    }else{
+	return f(n-1)+f(n-2);
+    }
+}
+
+------------------------------------------------------------------------------------
+å¼‚å¸¸
+
+å¼‚å¸¸è¯­å¥çš„å‡ ç§å½¢å¼:
+1.try{ ... }catch(Exception e){ ... }
+
+2.try{ ... }catch(Exception e){ ... }finally{ ... }
+æ³¨:ä½¿ç”¨finallyæ—¶ï¼Œä¸è®ºç¨‹åºæœ‰æ— å¼‚å¸¸å‘ç”Ÿï¼Œæœ€ç»ˆéƒ½ä¼šæ‰§è¡Œfinallyè¯­å¥ã€‚
 
 3.
 try{
-    ¡­
-}catch(Òì³£Àà1  e1){
-    ¡­
-}catch(Òì³£Àà2  e2){
-    ¡­
+     ... 
+}catch(å¼‚å¸¸ç±»1  e1){
+     ... 
+}catch(å¼‚å¸¸ç±»2  e2){
+     ... 
 }
-[¡­¡­]
+[ ...  ... ]
 catch(Exception e){
-    ¡­
-}finally{¡­}
-×¢:Ê¹ÓÃ´ËÖÖĞÎÊ½µÄÓï¾äÊ±£¬Exception±ØĞë·ÅÔÚ×îºó£¬ÒòÎªExceptionÀàÊÇËùÓĞÒì³£ÀàµÄ¸¸Àà¡£
+     ... 
+}finally{ ... }
 
-4.try{¡­} finally{¡­}
+æ³¨:ä½¿ç”¨æ­¤ç§å½¢å¼çš„è¯­å¥æ—¶ï¼ŒExceptionå¿…é¡»æ”¾åœ¨æœ€åï¼Œå› ä¸ºExceptionç±»æ˜¯æ‰€æœ‰å¼‚å¸¸ç±»çš„çˆ¶ç±»ã€‚
 
-Òì³£Óï¾äÖĞµÄ¹Ø¼ü×Ö: try¡¢catch¡¢finally¡¢throw¡¢throws¡£
+4.try{ ... } finally{ ... }
 
-×Ô¶¨ÒåÒì³£µÄ¸ñÊ½:
+å¼‚å¸¸è¯­å¥ä¸­çš„å…³é”®å­—: tryã€catchã€finallyã€throwã€throwsã€‚
+
+è‡ªå®šä¹‰å¼‚å¸¸çš„æ ¼å¼:
 public class MyException extends Exception{
-   ¡­¡­
+    ...  
 }
 
-throwsÒ»°ãÓÃÔÚ·½·¨ºóÃæ£¬ÌáÊ¾µ÷ÓÃÕß´Ë·½·¨¿ÉÄÜÅ×³öÒì³££¬±ØĞë²¶×½Òì³£:
-public void show(String ss) throws ArithmeticException,ArrayIndexOutOfBoundsException{
-   ¡­¡­
+throwsä¸€èˆ¬ç”¨åœ¨æ–¹æ³•åé¢ï¼Œæç¤ºè°ƒç”¨è€…æ­¤æ–¹æ³•å¯èƒ½æŠ›å‡ºå¼‚å¸¸ï¼Œå¿…é¡»æ•æ‰å¼‚å¸¸:
+public void show(String ss) throws ArithmeticException, ArrayIndexOutOfBoundsException{
+    ... 
 }
 
-µ÷ÓÃÊ±:
+è°ƒç”¨æ—¶:
 try{
     show(s);
 }catch(ArithmeticException ae){
-    ¡­¡­
+     ...  
 }catch(ArrayIndexOutOfBoundsException e){
-    ¡­¡­
+     ... 
 }catch(Exception ee){
-    ¡­¡­
+     ...  
 }finally{
-    ¡­¡­
+     ...  
 }
