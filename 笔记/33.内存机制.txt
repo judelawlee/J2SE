@@ -39,11 +39,10 @@ c.JVM启动参数: 调整各代的内存比例和垃圾回收算法，提高吞�
 d.程序算法: 改进程序逻辑算法提高性能。
 
 --------------------------------------------------------------------------------------------------
-堆溢出
+1.堆溢出
 在程序运行过程中，如果堆空间不足，则有可能抛出内存溢出错误(Out Of Memory)，简称为OOM。
 
 例:
-
 public class Heap{
     public static void main(String[] args){
         ArrayList list=new ArrayList();
@@ -57,12 +56,12 @@ public class Heap{
 java.lang.OutOfMemoryError: Java heap space
 
 
-栈溢出
+2.栈溢出
 
 例:
 public class Stack{
     public static void main(String[] args){
-        new Stack().test();
+        new Stack().test();  // 无限递归导致
     }
 
     public void test(){
