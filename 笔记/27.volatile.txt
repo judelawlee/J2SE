@@ -10,9 +10,9 @@ volatile 一般情况下不能代替 sychronized，因为 volatile 不能保证�
 组成: read i; inc; write i，假如多个线程同时执行i++，volatile只能保证他们操作的i是同一块内存，但依然可能出现写入
 脏数据的情况。如果配合Java 5增加的 atomic wrapper classes，对它们的increase之类的操作就不需要sychronized。
 
-volatile是变量修饰符，而 synchronized 作用于一段代码或方法。
+volatile 是变量修饰符，而 synchronized 作用于一段代码或方法。
 
-volatile关键字用于声明简单类型变量，如int、float、boolean等数据类型。
+volatile 关键字用于声明简单类型变量，如int、float、boolean等数据类型。
 如果这些简单数据类型声明为volatile，对它们的操作就会变成原子级别的。
 
 在使用volatile关键字时要慎重，并不是只要简单的把类型变量使用volatile修饰，对这个变量的所有操作都会成为原子操作，
