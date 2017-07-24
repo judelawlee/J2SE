@@ -1,5 +1,6 @@
 
 java.lang.Object 类有三个方法:
+
 1)void notify() 
 唤醒在此对象监视器上等待的单个线程。
 

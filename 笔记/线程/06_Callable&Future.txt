@@ -7,6 +7,7 @@ Callable 接口类似于 Runnable，从名字就可以看出来了，但是Runna
 而Callable功能更强大一些，被线程执行后，可以返回值，这个返回值可以被Future拿到，也就是说，Future可以拿到
 异步执行任务的返回值。
 
+---------------------------------------------------------------------------------------------------------------
 
 public class TestCallableAndFuture {
 
@@ -18,7 +19,8 @@ public class TestCallableAndFuture {
 			}
 		};
 
-		// FutureTask实现了两个接口，Runnable和Future，所以它既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值
+		// FutureTask实现了两个接口，Runnable和Future，所以它既可以作为Runnable被线程执行，
+		// 又可以作为Future得到Callable的返回值
 		FutureTask<Integer> future = new FutureTask<Integer>(callable);
 		new Thread(future).start();
 
