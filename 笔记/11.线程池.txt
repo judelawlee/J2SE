@@ -72,7 +72,7 @@ handler          - 由于超出线程范围和队列容量而使执行被阻塞�
 ThreadPoolExecutor是Executors类的底层实现。
 
 在JDK帮助文档中，有如此一段话:
-   "强烈建议程序员使用较为方便的Executors工厂方法Executors.newCachedThreadPool()(无界线程池，
+"强烈建议程序员使用较为方便的Executors工厂方法Executors.newCachedThreadPool()(无界线程池，
 可以进行自动线程回收)、Executors.newFixedThreadPool(int)(固定大小线程池)、
 Executors.newSingleThreadExecutor()(单个后台线程)，它们均为大多数使用场景预定义了设置。"
 
