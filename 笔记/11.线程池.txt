@@ -54,20 +54,19 @@ ThreadPoolExecutor: 线程池的具体实现类，一般用的各种线程池都
   这个线程就被停掉。所以线程池的所有任务完成后，它最终会收缩到 corePoolSize 的大小。
 
 ----------------------------------------------------------------------------------------------------------
-
 ThreadPoolExecutor的完整构造方法的签名是:
 
 ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime,
 	TimeUnit unit, BlockingQueue<Runnable> workQueue, ThreadFactory threadFactory,
 	RejectedExecutionHandler handler).
 
-corePoolSize     - 池中所保存的线程数，包括空闲线程。
-maximumPoolSize  - 池中允许的最大线程数。
-keepAliveTime    - 当线程数大于核心时，此为终止前多余的空闲线程等待新任务的最长时间。
+corePoolSize     - 线程池中的核心线程数，池中所保存的线程数，包括空闲线程。
+maximumPoolSize  - 线程池中允许的最大线程数。
+keepAliveTime    - 线程空闲时的存活时间，当线程数大于核心时，此为终止前多余的空闲线程等待新任务的最长时间。
 unit             - keepAliveTime 参数的时间单位。
 workQueue        - 执行前用于保持任务的队列。此队列仅保持由 execute 方法提交的 Runnable 任务。
 threadFactory    - 执行程序创建新线程时使用的工厂。
-handler          - 由于超出线程范围和队列容量而使执行被阻塞时所使用的处理程序。
+handler          - 线程池的饱和策略，由于超出线程范围和队列容量而使执行被阻塞时所使用的处理程序。
 
 ThreadPoolExecutor是Executors类的底层实现。
 
@@ -82,4 +81,8 @@ Java通过Executors提供四种线程池，分别为:
 3.newSingleThreadExecutor 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO、LIFO、优先级)执行。
 4.newScheduledThreadPool 创建一个定长线程池，支持定时及周期性任务执行。
 
-
+----------------------------------------------------------------------------------------------------------
+假设一个服务器完成一项任务所需时间为: T1 创建线程时间，T2 在线程中执行任务的时间，T3 销毁线程时间。
+如果: T1 + T3 远大于 T2，则可以采用线程池，以提高服务器性能。线程池技术正是关注如何缩短或调整T1、
+T3时间的技术，从而提高服务器程序性能的。它把T1、T3分别安排在服务器程序的启动和结束的时间段或者一些
+空闲的时间段，这样在服务器程序处理客户请求时，就不会有T1、T3的开销了。
