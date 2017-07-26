@@ -55,3 +55,16 @@ try {
 使用Lock可以很优雅的控制竞争资源的安全访问，但是这种锁不区分读写。为了提高性能，Java提供了读写锁，在读的
 地方使用读锁，在写的地方使用写锁，灵活控制，在一定程度上提高了程序的执行效率。
 
+
+---------------------------------------------------------------------------------------------------------
+ReentrantLock的实现原理
+
+ReentrantLock是基于AQS实现的。ReentrantLock实现的前提就是AbstractQueuedSynchronizer，简称AQS，是java
+.util.concurrent的核心，CountDownLatch、FutureTask、Semaphore、ReentrantLock等都有一个内部类是这个抽
+象类的子类。AQS是基于FIFO队列的实现。
+
+整个AQS是典型的模板模式的应用，设计得十分精巧，对于FIFO队列的各种操作在AQS中已经实现了，AQS的子类一般只
+需要重写tryAcquire(int arg)和tryRelease(int arg)两个方法即可。
+
+http://www.cnblogs.com/xrq730/p/4979021.html
+
