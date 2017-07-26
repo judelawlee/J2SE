@@ -4,108 +4,36 @@ volatile
 volatile 用在多线程，同步变量。线程为了提高效率，将某成员变量(如A)拷贝了一份(如B)，线程中对A的访问其实访问的是B。
 只在某些动作时才进行A和B的同步。因此存在A和B不一致的情况。volatile 就是用来避免这种情况的。
 
-volatile 所修饰的变量不保留拷贝，直接访问主内存中的(也就是上面说的A)。
-
-volatile 一般情况下不能代替 sychronized，因为 volatile 不能保证操作的原子性，即使只是i++，实际上也是由多个原子操作
-组成: read i; inc; write i，假如多个线程同时执行i++，volatile只能保证他们操作的i是同一块内存，但依然可能出现写入
-脏数据的情况。如果配合Java 5增加的 atomic wrapper classes，对它们的increase之类的操作就不需要sychronized。
-
-volatile 是变量修饰符，而 synchronized 作用于一段代码或方法。
-
 volatile 关键字用于声明简单类型变量，如int、float、boolean等数据类型。
-如果这些简单数据类型声明为volatile，对它们的操作就会变成原子级别的。
 
+volatile变量是Java语言提供的一种稍弱的同步机制，用来确保将变量的更新操作通知到其他线程。在访问volatile变量时不会
+执行加锁操作，因此也就不会使执行线程阻塞，因此volatile变量是一种比synchronized关键字更轻量级的同步机制。
+
+当把变量声明为volatile类型后，编译器在运行时都会注意到这个变量是共享的，因此不会将该变量上的操作与其他内存操作一
+起重排序。volatile变量不会被缓存在寄存器或者对其他处理器不可见的地方，因此在读取volatile类型的变量时总会从主内存
+中返回最新写入的值。
+
+当对非 volatile 变量进行读写的时候，每个线程先从内存拷贝变量到CPU缓存中。如果计算机有多个CPU，每个线程
+可能在不同的CPU上被处理，这意味着每个线程可以拷贝到不同的 CPU cache 中。如图 27.多CPU处理模型.png.
+
+volatile 所修饰的变量不保留拷贝，直接访问主内存中的(也就是上面说的A)。JVM 保证了每次读变量都从内存中读，
+跳过 CPU cache 这一步。
+
+注意:
+1.volatile只保证可见性，不保证原子性！
 在使用volatile关键字时要慎重，并不是只要简单的把类型变量使用volatile修饰，对这个变量的所有操作都会成为原子操作，
 当变量的值由自身的上一个值决定时，如 n=n+1、n++ 等，volatile关键字将失效，只有当变量的值和自身上一个值无关时对该
 变量的操作才是原子级别的，如 n=m+1，这个就是原子级别的。所以在使用volatile关键时一定要谨慎，如果自己没有把握，可
 以使用synchronized来代替volatile。
 
-volatile只保证可见性，不保证原子性！
+-------------------------------------------------------------------------------------------------------------------
+volatile的实现原理:
+volatile通过加入内存屏障和禁止重排序优化来实现的。
+1.对volatile变量执行写操作时，处理器会在写操作后加入一条store屏障指令(会把cpu写缓存区的缓存强制刷新到主内存中，
+同时防止处理器把volatile变量前面的变量重排序到volatile变量之后)。
+2.对volatile变量执行读操作时，会在读操作前加入一条load屏障指令(会强制缓存区的缓存失效，重新从主内存中读取volatile变
+量最新的值)。
 
------------------------------------------------------------------------------------------------------------------
-
-public class TestVolatile {
-	// 加上volatile
-	public static volatile int count3 = 0;
-
-	public static void inc() {
-		count3++;
-	}
-
-	public static void main(String[] args) throws InterruptedException {
-		for (int i = 0; i < 1000; i++) {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						Thread.sleep(1);
-					} catch (InterruptedException e) {
-					}
-
-					inc();
-				}
-			}).start();
-		}
-
-		Thread.sleep(2000);
-
-		// 运行结果依然不是我们期望的1000
-		System.out.println("运行结果: count3=" + TestCounter3.count3);
-	}
-}
-
-分析:
-假如有线程1、线程2，在进行 read、load 操作中，发现主内存中count的值都是5，那么都会加载这个最新的值。
-在线程1中，堆count进行修改之后，会write到主内存中，主内存中的count变量就会变为6。
-线程2由于已经进行 read、load 操作，在进行运算之后，也会更新主内存count的变量值为6。
-如图 27.volatile变量工作内存vs主内存.png
-
-public class TestVolatile2 {
-	public static volatile boolean flag5 = false;
-
-	public static void main(String[] args) throws InterruptedException {
-		for (int i = 0; i < 10; i++) {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					for (int i = 0; i < 100; i++) {
-						try {
-							Thread.sleep(1);
-						} catch (InterruptedException e) {
-						}
-
-						flag5 = i % 2 == 0 ? true : false;
-					}
-				}
-			}).start();
-		}
-
-		// 保证所有的线程都执行完毕
-		Thread.sleep(2000);
-
-		// 运行结果是我们期望的false，测试通过！
-		System.out.println("运行结果: flag5=" + TestFlag5.flag5);
-	}
-}
-
------------------------------------------------------------------------------------------------------------
-
-http://www.cnblogs.com/aigongsi/archive/2012/04/01/2429166.html
-http://www.cnblogs.com/zhengbin/p/5654805.html
-
-
-Java语言提供了一种稍弱的同步机制，即volatile变量，用来确保将变量的更新操作通知到其他线程。当把变量声明
-为volatile类型后，编译器在运行时都会注意到这个变量是共享的，因此不会将该变量上的操作与其他内存操作一起
-重排序。volatile变量不会被缓存在寄存器或者对其他处理器不可见的地方，因此在读取volatile类型的变量时总会
-返回最新写入的值。
-
-在访问volatile变量时不会执行加锁操作，因此也就不会使执行线程阻塞，因此volatile变量是一种比synchronized关
-键字更轻量级的同步机制。
-
-当对非 volatile 变量进行读写的时候，每个线程先从内存拷贝变量到CPU缓存中。如果计算机有多个CPU，每个线程
-可能在不同的CPU上被处理，这意味着每个线程可以拷贝到不同的 CPU cache 中。如图 27.多CPU处理模型.png.
-
-而声明变量是 volatile 的，JVM 保证了每次读变量都从内存中读，跳过 CPU cache 这一步。
 
 当一个变量定义为 volatile 之后，将具备两种特性:
 1.保证此变量对所有的线程的可见性。当一个线程修改了这个变量的值，volatile 保证新值能立即同步到主内存，以及
@@ -116,3 +44,9 @@ Java语言提供了一种稍弱的同步机制，即volatile变量，用来确�
 
 volatile 的读性能消耗与普通变量几乎相同，但是写操作稍慢，因为它需要在本地代码中插入许多内存屏障指令来保证
 处理器不发生乱序执行。
+
+
+http://www.cnblogs.com/aigongsi/archive/2012/04/01/2429166.html
+http://www.cnblogs.com/zhengbin/p/5654805.html
+
+
