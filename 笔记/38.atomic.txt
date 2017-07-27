@@ -88,7 +88,7 @@ CAS之上，没有CAS也就没有此包，可见CAS的重要性。
 当前的处理器基本都支持CAS，只不过不同的厂家的实现不一样罢了。CAS有三个操作数: 内存值V、旧的预期值A、要修
 改的值B，当且仅当预期值A和内存值V相同时，将内存值修改为B并返回true，否则什么都不做并返回false。
 
-CAS也是通过Unsafe实现的，Unsafe下三个方法:
+CAS也是通过Unsafe实现的，Unsafe中有三个方法:
 1.public final native boolean compareAndSwapObject(Object paramObject1, long paramLong, Object paramObject2, Object paramObject3);
 2.public final native boolean compareAndSwapInt(Object paramObject, long paramLong, int paramInt1, int paramInt2);
 3.public final native boolean compareAndSwapLong(Object paramObject, long paramLong1, long paramLong2, long paramLong3);

@@ -63,9 +63,9 @@ ReentrantLock是基于AQS实现的，AQS的基础是CAS。ReentrantLock实现的
 简称AQS，是java.util.concurrent的核心，CountDownLatch、FutureTask、Semaphore、ReentrantLock等都有一
 个内部类是这个抽象类的子类。
 
-在AQS内部会保存一个状态变量state(同步状态, state是volatile的)，通过CAS修改该变量的值，修改成功的线程表
-示获取到该锁，没有修改成功，或者发现状态state已经是加锁状态，则通过一个Waiter对象封装线程，添加到等待队
-列中，并挂起等待被唤醒。
+在AQS内部会保存一个状态变量state(同步状态, state是volatile类型)，通过CAS修改该变量的值，修改成功的线程
+表示获取到该锁，没有修改成功，或者发现状态state已经是加锁状态，则通过一个Waiter对象封装线程，添加到等待
+队列中，并挂起等待被唤醒。
 
 AQS是基于FIFO(First Input First Output，先入先出)队列的实现。
 

@@ -19,7 +19,7 @@ wrapper classes，对它们的increase之类的操作就不需要sychronized。
 
 synchronized 和 volatile比较:
 1.volatile 是变量修饰符，而 synchronized 作用于一段代码或方法。
-2.volatile 不需要加锁，比synchronized更轻量级,不会阻塞线程。
+2.volatile 不需要加锁，比synchronized更轻量级，不会阻塞线程。
 3.synchronized 既能保证可见性，又能保证原子性，而volatile只能保证可见性，无法保证原子性。
 
 -------------------------------------------------------------------------------------------
