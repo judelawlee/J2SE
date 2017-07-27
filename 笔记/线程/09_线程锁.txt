@@ -59,12 +59,25 @@ try {
 ---------------------------------------------------------------------------------------------------------
 ReentrantLock的实现原理
 
-ReentrantLock是基于AQS实现的。ReentrantLock实现的前提就是AbstractQueuedSynchronizer，简称AQS，是java
-.util.concurrent的核心，CountDownLatch、FutureTask、Semaphore、ReentrantLock等都有一个内部类是这个抽
-象类的子类。AQS是基于FIFO队列的实现。
+ReentrantLock是基于AQS实现的，AQS的基础是CAS。ReentrantLock实现的前提就是AbstractQueuedSynchronizer，
+简称AQS，是java.util.concurrent的核心，CountDownLatch、FutureTask、Semaphore、ReentrantLock等都有一
+个内部类是这个抽象类的子类。
+
+在AQS内部会保存一个状态变量state(同步状态, state是volatile的)，通过CAS修改该变量的值，修改成功的线程表
+示获取到该锁，没有修改成功，或者发现状态state已经是加锁状态，则通过一个Waiter对象封装线程，添加到等待队
+列中，并挂起等待被唤醒。
+
+AQS是基于FIFO(First Input First Output，先入先出)队列的实现。
 
 整个AQS是典型的模板模式的应用，设计得十分精巧，对于FIFO队列的各种操作在AQS中已经实现了，AQS的子类一般只
 需要重写tryAcquire(int arg)和tryRelease(int arg)两个方法即可。
+
+线程获取锁的过程:
+1.设置AbstractQueuedSynchronizer的state为1
+2.设置AbstractOwnableSynchronizer的thread为当前线程
+这两步做完之后就表示线程独占了锁。
+
+
 
 http://www.cnblogs.com/xrq730/p/4979021.html
 
