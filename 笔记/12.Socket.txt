@@ -1,22 +1,19 @@
 
 通信协议分层思想:
-	应用层、
-	传输层(TCP、UDP层)、
-	网络层(IP层)、
-	物理层(数据链路层)。
+应用层、
+传输层(TCP、UDP层)、
+网络层(IP层)、
+物理层(数据链路层)。
 
 TCP/IP协议
 
-IP地址: 提供独一无二的IP地址。
-	由4个字节来表示，每个字节能够代表的最大的数是255。(IPv4)
+IP地址: 提供独一无二的IP地址。由4个字节来表示，每个字节能够代表的最大的数是255。(IPv4)
+IPv6(下一代、8个字节)
 
-	IPv6(下一代、8个字节)
+Socket通信: TCP、UDP
 
-Socket通信
-    TCP、UDP
-
-TCP:可靠的、效率低。
-UDP:不可靠的、效率高。
+TCP: 可靠的、效率低。
+UDP: 不可靠的、效率高。
 
 java.net.Socket TCP的client端
 java.net.ServerSocket TCP的server端
