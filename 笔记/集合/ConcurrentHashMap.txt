@@ -10,7 +10,7 @@ ConcurrentHashMap 是 Java 5 中支持高并发、高吞吐量的线程安全的
 ConcurrentHashMap 具体是怎么实现线程安全的呢?
 从 ConcurrentHashMap 代码中可以看出，它引入了一个"分段锁"的概念，具体可以理解为把一个大的Map拆分成
 N个小的 Hashtable，根据 key.hashCode() 来决定把 key 放到哪个 Hashtable 中。在 ConcurrentHashMap 中，
-就是把 Map 分成了N个 Segment（段），put和get的时候，都是先根据key.hashCode()算出放到哪个Segment中。
+就是把 Map 分成了N个 Segment(段)，put和get的时候，都是先根据key.hashCode()算出放到哪个Segment中。
 
 ConcurrentHashMap 允许多个修改操作并发进行，其关键在于使用了锁分离技术。它使用了多个锁来控制对hash表
 的不同部分进行修改。ConcurrentHashMap 内部使用 "段(Segment)" 来表示这些不同的部分，每个段其实就是一个
@@ -21,4 +21,47 @@ ConcurrentHashMap 允许多个修改操作并发进行，其关键在于使用�
 
 ConcurrentHashMap 允许多个读操作并发进行，读操作并不需要加锁。
 
-在 HashMap 中，如果允许可以在hash链的中间添加或删除元素，读操作不加锁将得到不一致的数据。
+ConcurrentHashMap使用分段锁技术，将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁
+访问其中一个段数据的时候，其他段的数据也能被其他线程访问，能够实现真正的并发访问。
+
+Segment继承了ReentrantLock，表明每个segment都可以当做一个锁。这样对每个segment中的数据需要同步操作的
+话都是使用每个segment容器对象自身的锁来实现。只有对全局需要改变时锁定的是所有的segment。
+
+Segment下面包含很多个HashEntry列表数组。对于一个key，需要经过三次hash操作，才能最终定位这个元素的位置，
+这三次hash分别为:
+1.对于一个key，先进行一次hash操作，得到hash值h1，也即h1 = hash1(key);
+2.将得到的h1的高几位进行第二次hash，得到hash值h2，也即h2 = hash2(h1高几位)，通过h2能够确定该元素的放
+在哪个Segment;
+3.将得到的h1进行第三次hash，得到hash值h3，也即h3 = hash3(h1)，通过h3能够确定该元素放置在哪个HashEntry。
+
+ConcurrentHashMap中主要实体类就是三个: 
+ConcurrentHashMap(整个Hash表),Segment(桶)，HashEntry(节点)。
+
+-----------------------------------------------------------------------------------------------------
+初始化操作
+
+
+-----------------------------------------------------------------------------------------------------
+put操作
+
+
+-----------------------------------------------------------------------------------------------------
+get操作
+
+
+-----------------------------------------------------------------------------------------------------
+size操作
+
+size操作与put和get操作最大的区别在于，size操作需要遍历所有的Segment才能算出整个Map的大小，而put和get都
+只关心一个Segment。假设我们当前遍历的Segment为SA，那么在遍历SA过程中其他的Segment比如SB可能会被修改，于
+是这一次运算出来的size值可能并不是Map当前的真正大小。所以一个比较简单的办法就是计算Map大小的时候所有的
+Segment都Lock住，不能更新(包含put，remove等等)数据，计算完之后再Unlock。
+
+
+
+
+
+
+https://my.oschina.net/hosee/blog/639352
+
+
