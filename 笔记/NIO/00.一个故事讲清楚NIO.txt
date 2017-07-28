@@ -44,3 +44,8 @@ mainReactor线程负责监听server socket，accept新连接，并将建立的so
 subReactor可以是一个线程，也可以是线程池（一般可以设置为CPU核数），负责多路分离已连接的socket，读写网络数据，这里的读写
 网络数据可类比顾客填表这一耗时动作，对具体的业务处理功能，其扔给worker线程池完成。
 
+
+http://blog.jobbole.com/88984/
+
+
+
