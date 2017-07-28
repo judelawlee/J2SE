@@ -31,4 +31,11 @@ FinalizerThread类型的守护线程，负责从引用队列(ReferenceQueue)中�
 会执行原始对象的finalize方法。
 
 
+1.Finalizer对象什么时候会在引用队列中?
+在发生GC的时候
 
+2.如何验证finalize方法会执行?
+方法一: 初始化一个大数组，可以明显看出gc之后是否被回收，然后执行System.gc()，在finalize方法中输出信息。
+
+方法二: 自定义一个对象A，重写finalize()方法，在方法中输出一些信息。在main方法中new几个对象A的实例a1、a2、
+a3，然后将 a1=a2=a3=null，置为null，然后执行 System.gc()，可以看到在finalize()中的输出信息。
