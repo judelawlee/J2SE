@@ -1,0 +1,97 @@
+
+
+Object是所有类的父类。
+
+Object:
+Object()
+registerNatives()
+getClass()
+hashCode()
+equals(Object)
+clone()
+toString()
+notify()
+notifyAll()
+wait(long)
+wait(long, int)
+wait()
+finalize()
+
+-------------------------------------------------------------------------------------------------------
+1.equals(Object)
+有一种说法: == 比较的是地址; equals()比较的是对象内容。这种说法是不严谨的！
+
+具体可见如下, Object类的equals()方法:
+
+public boolean equals(Object obj) {
+    return (this == obj);
+}
+
+这明显是比较地址！
+
+因为在Integer、String、Double等封装类中，已经重载(overriding)了Object类的equals()方法，
+于是有了另一种计算公式，是进行内容的比较。
+
+例如Integer类的equals()方法:
+
+public boolean equals(Object obj) {
+    if (obj instanceof Integer) {
+        return value == ((Integer)obj).intValue();
+    }
+    return false;
+}
+
+
+/**
+ * 重写Object的equals方法
+ */
+public boolean equals(Object obj) {
+	if (obj == null) {
+		return false;
+	} else if (obj instanceof Cat) {
+		Cat catObj = (Cat) obj;
+		if (catObj.getColor() == this.color && catObj.getHeight() == this.height
+				&& catObj.getWeight() == this.weight) {
+			return true;
+		}
+	}
+	return false;
+}
+
+
+2.hashCode()
+在Object类中的定义为: public native int hashCode(); 是一个本地方法，返回对象的地址值。
+但是，同样的思路，在String等封装类中对此方法进行了重写。方法调用后得到一个计算公式得到的int值。
+
+Integer类的hashCode返回整数值:
+public int hashCode() {
+    return value;
+}
+
+总结:
+1)两个obj，如果equals()相等，hashCode()一定相等。
+2)两个obj，如果hashCode()相等，equals()不一定相等。
+
+可以通过覆盖equals方法来比较两个对象的内容，为了提高比较效率，java底层会先判断hashCode是否相等，如果hashCode相等，
+再来判断equals是否相等，如果hashCode不相等，则不会判断equals而直接返回false，只有hashCode相等，而且equals也相等，
+才会认为两个对象完全相等。
+
+
+3.finalize()
+垃圾回收器准备释放对象内存的时候，会先调用对象的finalize()。
+
+protected void finalize() throws Throwable { }
+
+原理:
+新建一个对象时，在JVM中会判断该对象是否重写了finalize方法，如果类重写了finalize方法，且finalize方法体
+不为空，则把该对象封装成Finalizer对象，并添加到Finalizer链表头。在Finalizer类的静态代码块中会创建一个
+FinalizerThread类型的守护线程，负责从引用队列(ReferenceQueue)中获取Finalizer对象，如果队列中没有元素，
+则通过wait方法将该线程挂起，等待被唤醒。如果返回了Finalizer对象，会执行对象的runFinalizer()方法，最终
+会执行原始对象的finalize方法。
+
+重写finalize():
+protected void finalize() throws java.lang.Throwable {
+	super.finalize();
+	System.out.println("Cake Object " + id + " is disposed");
+}
+
