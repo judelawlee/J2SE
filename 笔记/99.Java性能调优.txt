@@ -1,0 +1,38 @@
+
+1.使用StringBuilder
+
+2.避免使用正则表达式
+
+3.不要使用iterator()方法
+
+4.使用原始类型和栈
+
+	//存储在堆上
+	Integer i = 817598;
+
+	// 存储在栈上
+	int i = 817598;
+
+	//在堆上生成了三个对象
+	Integer[] i = { 1337, 424242 };
+
+	// 仅在堆上生成了一个对象
+	int[] i = { 1337, 424242 };
+
+5.避免递归
+
+6.优化自定义hasCode()方法和equals()方法
+
+7.尽可能使用局部变量
+
+8.及时关闭流
+
+9.使用同步代码块替代同步方法
+
+10.使用带缓冲的输入输出流进行IO操作
+即BufferedReader、BufferedWriter、BufferedInputStream、BufferedOutputStream
+
+11.顺序插入和随机访问比较多的场景使用ArrayList，元素删除和中间插入比较多的场景使用LinkedList
+
+
+
