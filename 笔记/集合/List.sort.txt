@@ -1,6 +1,9 @@
-Collections.sort() ¿ÉÒÔ¶Ô List ½øĞĞÅÅĞò 
+
+Collections.sort() å¯ä»¥å¯¹ List è¿›è¡Œæ’åº 
+
 --------------------------------------------------------------------
-°¸ÀıÒ»:
+æ¡ˆä¾‹ä¸€
+
 public class User {
 
 	private int id;
@@ -33,9 +36,9 @@ public static void main(String[] args) {
 	Collections.sort(list, new Comparator<User>() {
 		@Override
 		public int compare(User u1, User u2) {
-			// °´ÕÕÄêÁäÉıĞòÅÅÁĞ
+			// æŒ‰ç…§å¹´é¾„å‡åºæ’åˆ—
 			return u1.getAge() > u2.getAge() ? 1 : -1;
-			// °´ÕÕÄêÁä½µĞòÅÅÁĞ
+			// æŒ‰ç…§å¹´é¾„é™åºæ’åˆ—
 			// return u1.getAge() > u2.getAge() ? -1 : 1;
 		}
 	});
@@ -45,14 +48,15 @@ public static void main(String[] args) {
 	}
 }
 
-//½á¹û:
+//ç»“æœ:
 {"age":25,"id":1,"name":"Jack"}
 {"age":27,"id":2,"name":"Tommy"}
 {"age":28,"id":3,"name":"David"}
 
 --------------------------------------------------------------------
-°¸Àı¶ş:
-//Ò»¸öPOJOÀı×Ó
+æ¡ˆä¾‹äºŒ
+
+//ä¸€ä¸ªPOJOä¾‹å­
 class User {
 	String name;
 	String age;
@@ -63,7 +67,7 @@ class User {
 	}
 }
 
-//¾ßÌåµÄ±È½ÏÀà£¬ÊµÏÖComparator½Ó¿Ú
+//å…·ä½“çš„æ¯”è¾ƒç±»ï¼Œå®ç°Comparatoræ¥å£
 import java.util.Comparator;
 import java.util.List;
 import java.util.ArrayList;
@@ -74,7 +78,7 @@ public class ComparatorUser implements Comparator{
 		User user0=(User)arg0;
 		User user1=(User)arg1;
 
-		//Ê×ÏÈ±È½ÏÄêÁä£¬Èç¹ûÄêÁäÏàÍ¬£¬Ôò±È½ÏÃû×Ö
+		//é¦–å…ˆæ¯”è¾ƒå¹´é¾„ï¼Œå¦‚æœå¹´é¾„ç›¸åŒï¼Œåˆ™æ¯”è¾ƒåå­—
 		int flag=user0.getAge().compareTo(user1.getAge());
 		if(flag==0){
 			return user0.getName().compareTo(user1.getName());
@@ -84,7 +88,7 @@ public class ComparatorUser implements Comparator{
 	}
 }
 
-//²âÊÔ
+//æµ‹è¯•
 public static void main(String[] args){
 	List userlist=new ArrayList();
 	userlist.add(new User("dd","4"));
@@ -104,11 +108,11 @@ public static void main(String[] args){
 	}
 }
 
-//½á¹û(Ê×ÏÈÄêÁäÅÅĞò£¬Èç¹ûÄêÁäÏàÍ¬£¬Ôò°´Ãû×ÖÅÅĞò):
+//ç»“æœ(é¦–å…ˆå¹´é¾„æ’åºï¼Œå¦‚æœå¹´é¾„ç›¸åŒï¼Œåˆ™æŒ‰åå­—æ’åº):
 1, aa
 2, bb
 3, cc
 4, dd
-5, ee //×¢Òâ:Í¬ÑùÊÇ5ËêµÄÈË£¬Ôò±È½ÏÃû×Ö(ee,ff)£¬È»ºóÅÅĞò
+5, ee //æ³¨æ„:åŒæ ·æ˜¯5å²çš„äººï¼Œåˆ™æ¯”è¾ƒåå­—(ee,ff)ï¼Œç„¶åæ’åº
 5, ff
 6, gg
