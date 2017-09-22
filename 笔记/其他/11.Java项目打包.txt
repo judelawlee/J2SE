@@ -32,14 +32,11 @@ D:\beta>jar cvfm h.jar m.txt
 --运行jar文件
 D:\bankmyth1>java -jar bankmyth1.jar
 
-
 ---------------------------------------------------------------------------------------------------
-
 系统环境变量
 java_home = e:\jdk
 classpath = .;e:\jdk\lib
 path      = .;e:\jdk\bin;e:\jdk\lib;
-
 
 C:\aaa>java com.H
 

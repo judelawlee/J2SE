@@ -1,20 +1,17 @@
 
-Java 环境变量的配置：
-   java_home => D:\jdk (新增)
-   path => D:\jdk\bin (编辑、追加)
+JAVA环境变量的配置:
+JAVA_HOME => D:\jdk (新增)
+Path => D:\jdk\bin (编辑、追加)
 
-一.运行java应用程序：
-1.编写testHello.java源程序;
-2.在“运行”中输入以下命令：
-    D:\JavaExamples>javac testHello.java
-  生成testHello.class字节码文件(编译)；
-3.在“运行”中输入以下命令：
-    D:\JavaExamples>java testHello
+一.运行Java应用程序:
+1.编写 testHello.java 源程序;
+2.在cmd中输入以下命令:
+D:\JavaExamples> javac testHello.java (生成testHello.class字节码文件, 编译);
+3.在cmd中输入以下命令:
+D:\JavaExamples> java testHello
 
-二.运行java小程序(applet)：
-1.写好Hello.java源程序;
-2.在“运行”中输入“D:\JavaExamples>javac Hello.java”
-  生成Hello.class字节码文件，
-3.编写嵌入了Hello.class代码的Hello.html文件
-4.在“运行”中输入：D:\JavaExamples>appletviewer Hello.html”
-  或在IE浏览器中输入：D:\JavaExamples\Hello.html。
+二.运行java小程序(applet):
+1.写好 Hello.java 源程序;
+2.在cmd中输入 D:\JavaExamples>javac Hello.java，生成Hello.class字节码文件;
+3.编写嵌入了Hello.class代码的Hello.html文件;
+4.在cmd中输入 D:\JavaExamples>appletviewer Hello.html 或 在IE浏览器中输入 D:\JavaExamples\Hello.html。

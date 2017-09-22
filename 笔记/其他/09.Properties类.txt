@@ -1,6 +1,7 @@
-PropertiesÎÄ¼ş
-¼ü²»ÔÊĞíÖØ¸´
-Èç¹ûÖØ¸´£¬ºóÕß½«»á¸²¸ÇÇ°Õß¡£
+
+Propertiesæ–‡ä»¶
+é”®ä¸å…è®¸é‡å¤
+å¦‚æœé‡å¤ï¼Œåè€…å°†ä¼šè¦†ç›–å‰è€…ã€‚
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,7 +22,7 @@ public class PropertiesDemo {
 	}
 
 	/**
-	 * ¶ÁÈ¡PropertiesÎÄ¼ş
+	 * è¯»å–Propertiesæ–‡ä»¶
 	 */
 	public static void readPropsFile(String path) {
 		try {
@@ -43,7 +44,7 @@ public class PropertiesDemo {
 	}
 
 	/**
-	 * Ğ´ÈëPropertiesÎÄ¼ş
+	 * å†™å…¥Propertiesæ–‡ä»¶
 	 */
 	public static void writePropsFile(String path) {
 		try {
@@ -54,7 +55,7 @@ public class PropertiesDemo {
 				FileOutputStream fos = new FileOutputStream(f);
 				p.setProperty("adminAccount", "admin");
 				p.setProperty("adminPwd", "123456");
-				p.store(fos, "¹ÜÀíÔ±ÕËºÅºÍÃÜÂë");
+				p.store(fos, "ç®¡ç†å‘˜è´¦å·å’Œå¯†ç ");
 				fos.close();
 			} catch (Exception e) {
 			}
@@ -64,7 +65,7 @@ public class PropertiesDemo {
 	}
 
 	/**
-	 * ¶ÁÈ¡XMLÎÄ¼ş ×¢£º¸Ã XMLÎÄµµ±ØĞë¾ßÓĞÒÔÏÂ DOCTYPEÉùÃ÷£º <!DOCTYPE properties SYSTEM
+	 * è¯»å–XMLæ–‡ä»¶ æ³¨ï¼šè¯¥ XMLæ–‡æ¡£å¿…é¡»å…·æœ‰ä»¥ä¸‹ DOCTYPEå£°æ˜ï¼š <!DOCTYPE properties SYSTEM
 	 * "http://java.sun.com/dtd/properties.dtd">
 	 */
 	public static void readXmlFile(String path) {
@@ -80,7 +81,7 @@ public class PropertiesDemo {
 	}
 
 	/**
-	 * Ğ´ÈëXMLÎÄ¼ş
+	 * å†™å…¥XMLæ–‡ä»¶
 	 */
 	public static void writeXmlFile(String path) {
 		try {

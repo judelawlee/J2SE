@@ -11,12 +11,12 @@ public class Test {
 
 		// Hex hex = new Hex();
 		Base64 base64 = new Base64();
-		// Base64±àÂë
+		// Base64ç¼–ç 
 		byte[] b1 = base64.encode(s.getBytes());
 		String s1 = new String(b1);
 		System.out.println(s1);
 
-		// Base64½âÂë
+		// Base64è§£ç 
 		byte[] b2 = base64.decode(b1);
 		String s2 = new String(b2);
 		System.out.println(s2);

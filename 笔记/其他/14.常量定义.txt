@@ -1,4 +1,5 @@
-1.Ã¶¾Ù
+
+1.æšä¸¾
 public enum Constant {
 	IBATIS_INSERT("insert"),
 	IBATIS_UPDATE("update"),
@@ -11,33 +12,33 @@ public enum Constant {
 }
 
 
-2.½Ó¿Ú
+2.æ¥å£
 public interface Const {
-	/** ÓÃÓÚ±£´æµ±Ç°µÇÂ¼ÓÃ»§ */
+	/** ç”¨äºä¿å­˜å½“å‰ç™»å½•ç”¨æˆ· */
 	String USER_SESSION_ID = "LOGIN_USER";
-	/** systemAdmin²»ÊÜÈÎºÎÈ¨ÏŞÏŞÖÆ */
+	/** systemAdminä¸å—ä»»ä½•æƒé™é™åˆ¶ */
 	String SYSTEM_ADMIN_ID = "systemAdmin";
 }
 
-3.Àà
+3.ç±»
 public class Constants {
 	/**
-	 * Ê×Ò³Ä£°å
+	 * é¦–é¡µæ¨¡æ¿
 	 */
 	public static final String TPLDIR_INDEX = "index";
 	
         /**
-	 * Ò³Ãæ½ûÖ¹·ÃÎÊ
+	 * é¡µé¢ç¦æ­¢è®¿é—®
 	 */
 	public static final String ERROR_403 = "error/403";
 	
 	/**
-	 * ±¸·İÂ·¾¶
+	 * å¤‡ä»½è·¯å¾„
 	 */
 	public static final String BACKUP_PATH = "/backup";
 	
 	/**
-	 * ÎÄ¼şÂ·¾¶·Ö¸ô·û
+	 * æ–‡ä»¶è·¯å¾„åˆ†éš”ç¬¦
 	 */
 	public static final String FILE_SEPARATOR = System.getProperty("file.separator");
 }

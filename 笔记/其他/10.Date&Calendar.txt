@@ -1,17 +1,19 @@
-ÈÕÆÚÀà£º
-    Date¡¢Calendar(ÍÆ¼öÊ¹ÓÃ)¡£
-    
-    Calendar ÀàÊÇÒ»¸ö³éÏóÀà£¬
 
-    Calendar now=Calendar.getInstance();
-    //µ±Ç°Ê±¼ä
-    System.out.println(now.getTime().toLocaleString());
-    //Ã÷ÌìµÄµ±Ç°Ê±¼ä
-    now.add(Calendar.DAY_OF_MONTH,1);
-    System.out.println(now.getTime().toLocaleString());
-    //×òÌìµÄµ±Ç°Ê±¼ä
-    now.add(Calendar.DAY_OF_MONTH,-2);
-    System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:MM:ss").format(now.getTime()));
+æ—¥æœŸç±»:
+Dateã€Calendar(æ¨èä½¿ç”¨)ã€‚
+    
+Calendar æ˜¯ä¸€ä¸ªæŠ½è±¡ç±»ã€‚
+
+//è·å–å®ä¾‹
+Calendar now=Calendar.getInstance();
+//å½“å‰æ—¶é—´
+System.out.println(now.getTime().toLocaleString());
+//æ˜å¤©çš„å½“å‰æ—¶é—´
+now.add(Calendar.DAY_OF_MONTH,1);
+System.out.println(now.getTime().toLocaleString());
+//æ˜¨å¤©çš„å½“å‰æ—¶é—´
+now.add(Calendar.DAY_OF_MONTH,-2);
+System.out.println(new SimpleDateFormat("yyyy-MM-dd hh:MM:ss").format(now.getTime()));
     
 
 public class TestCalendar {
@@ -23,15 +25,15 @@ public class TestCalendar {
 		Calendar now = Calendar.getInstance();
 		System.out.println(fmt.format(now.getTime()));
 
-		// Ò»ÄêÇ°
+		// ä¸€å¹´å‰
 		// now.add(Calendar.YEAR, -1);
 		// System.out.println(fmt.format(now.getTime()));
 
-		// Ò»ÔÂÇ°
+		// ä¸€æœˆå‰
 		// now.add(Calendar.MONTH, -1);
 		// System.out.println(fmt.format(now.getTime()));
 
-		// Ò»ÌìÇ°
+		// ä¸€å¤©å‰
 		// now.add(Calendar.DATE, -1);
 		// now.add(Calendar.DAY_OF_YEAR, -1);
 		// now.add(Calendar.DAY_OF_MONTH, -1);
