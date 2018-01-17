@@ -1,0 +1,7 @@
+
+1.Caused by: java.lang.UnsupportedClassVersionError:
+ Unsupported major.minor version 52.0
+        at java.lang.ClassLoader.defineClass1(Native Method)
+
+简单来说，就是java的编译环境版本太低，java 8 class file的版本是52，Java 7只能支持到51。
+所以需要升级到java 8才行。
