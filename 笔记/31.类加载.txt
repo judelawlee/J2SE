@@ -147,31 +147,32 @@ ClassLoader源码:
 public Class<?> loadClass(String name)throws ClassNotFoundException {
     return loadClass(name, false);
 }
-    
+
 protected synchronized Class<?> loadClass(String name, boolean resolve)throws ClassNotFoundException {
-    // 首先判断该类型是否已经被加载
-    Class c = findLoadedClass(name);
+  // 首先判断该类型是否已经被加载
+  Class c = findLoadedClass(name);
 
-    if (c == null) {
-	//如果没有被加载，就委托给父类加载或者委派给启动类加载器加载
-	try {
-	    if (parent != null) {
-		 //如果存在父类加载器，就委派给父类加载器加载
-		c = parent.loadClass(name, false);
-	    } else {
-	        //如果不存在父类加载器，就检查是否是由启动类加载器加载的类，通过调用本地方法native Class findBootstrapClass(String name)
-		c = findBootstrapClass0(name);
-	    }
-	} catch (ClassNotFoundException e) {
-	    // 如果父类加载器和启动类加载器都不能完成加载任务，才调用自身的加载功能
-	    c = findClass(name);
-	}
-    }
+  if (c == null) {
+  	//如果没有被加载，就委托给父类加载或者委派给启动类加载器加载
+  	try {
+  	    if (parent != null) {
+  		 //如果存在父类加载器，就委派给父类加载器加载
+  		c = parent.loadClass(name, false);
+  	    } else {
+  	        //如果不存在父类加载器，就检查是否是由启动类加载器加载的类，通过调用本地方法native Class findBootstrapClass(String name)
+  		c = findBootstrapClass0(name);
+  	    }
+  	} catch (ClassNotFoundException e) {
+  	    // 如果父类加载器和启动类加载器都不能完成加载任务，才调用自身的加载功能
+  	    c = findClass(name);
+  	}
+  }
 
-    if (resolve) {
-	resolveClass(c);
-    }
-    return c;
+  if (resolve) {
+	  resolveClass(c);
+  }
+
+  return c;
 }
 
 双亲委派模型意义:
@@ -182,6 +183,3 @@ protected synchronized Class<?> loadClass(String name, boolean resolve)throws Cl
 Object和Class两个类之间的区别:
 Object是所有类的父类，所有类当然也包括Class类。所以，Object类是Class类的父类。
 Class这个类的构造方法是私有的，所以不能显式的new一个Class对象。它是用来描述一个对象的元信息的。
-
-
-
