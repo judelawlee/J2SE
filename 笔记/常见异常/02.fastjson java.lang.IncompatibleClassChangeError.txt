@@ -1,0 +1,36 @@
+
+错误信息：
+java.lang.IncompatibleClassChangeError: Found interface java.lang.reflect.Type, but class was expected
+at Serializer_18.write1(Unknown Source)
+at Serializer_18.write(Unknown Source)
+at com.alibaba.fastjson.serializer.ObjectFieldSerializer.writeValue(ObjectFieldSerializer.java:120)
+at com.alibaba.fastjson.serializer.ObjectFieldSerializer.writeProperty(ObjectFieldSerializer.java:67)
+at com.alibaba.fastjson.serializer.JavaBeanSerializer.write(JavaBeanSerializer.java:225)
+at com.alibaba.fastjson.serializer.JSONSerializer.writeWithFieldName(JSONSerializer.java:390)
+at Serializer_15.write1(Unknown Source)
+at Serializer_15.write(Unknown Source)
+at com.alibaba.fastjson.serializer.ObjectFieldSerializer.writeValue(ObjectFieldSerializer.java:120)
+at com.alibaba.fastjson.serializer.ObjectFieldSerializer.writeProperty(ObjectFieldSerializer.java:67)
+at com.alibaba.fastjson.serializer.JavaBeanSerializer.write(JavaBeanSerializer.java:225)
+at com.alibaba.fastjson.serializer.ArraySerializer.write(ArraySerializer.java:67)
+at com.alibaba.fastjson.serializer.JSONSerializer.writeWithFieldName(JSONSerializer.java:390)
+at Serializer_12.write1(Unknown Source)
+at Serializer_12.write(Unknown Source)
+at com.alibaba.fastjson.serializer.JSONSerializer.writeWithFieldName(JSONSerializer.java:390)
+at Serializer_10.write1(Unknown Source)
+at Serializer_10.write(Unknown Source)
+at com.alibaba.fastjson.serializer.MapSerializer.write(MapSerializer.java:188)
+at com.alibaba.fastjson.serializer.JSONSerializer.write(JSONSerializer.java:361)
+at com.alibaba.fastjson.JSON.toJSONString(JSON.java:393)
+at com.alibaba.fastjson.JSON.toJSONString(JSON.java:381)
+
+问题分析：
+jdk1.8下若接口的缺省方法未被重写，则fastjson反系列化可能报错：
+java.lang.IncompatibleClassChangeError: Found interface xxx, but class was expected
+
+原因：
+实现类中未实现xxx interface的 default 方法，导致asm中设值的method属于接口(本应属于实现类)，调用错误。
+
+@see https://github.com/alibaba/fastjson/issues/289
+
+jdk1.8下务必要使用fastjson的高版本（至少1.2.9以上）。
