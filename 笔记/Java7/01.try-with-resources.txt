@@ -1,7 +1,7 @@
 
-Java SE7 新特性之 try-with-resources 语句
+Java7 新特性之 try-with-resources 语句
 
-try-with-resources 语句是一个声明一个或多个资源的 try 语句。一个资源作为一个对象，必须在程序结束之后随之关闭。 
+try-with-resources 语句是一个声明一个或多个资源的 try 语句。一个资源作为一个对象，必须在程序结束之后随之关闭。
 try-with-resources 语句确保在语句的最后每个资源都被关闭。任何实现了 Java.lang.AutoCloseable 的对象, 包括所有
 实现了 java.io.Closeable 的对象, 都可以用作一个资源。
 
@@ -17,10 +17,9 @@ BufferedReader都将会关闭。
 
 在 Java SE7 之前, 可以使用 finally 块来确保资源被关闭，不管 try 语句正常地完成或是发生意外。
 例:
-BufferedReader br = new BufferedReader(new FileReader(path));
-try {
-	return br.readLine();
-} finally {
-	if (br != null) br.close();
-}
-
+  BufferedReader br = new BufferedReader(new FileReader(path));
+  try {
+  	return br.readLine();
+  } finally {
+  	if (br != null) br.close();
+  }
