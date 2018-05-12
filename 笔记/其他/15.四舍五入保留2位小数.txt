@@ -1,0 +1,26 @@
+
+
+保留两位小数四舍五入的方法:
+double f = 231.5565;
+
+// 方式一：
+BigDecimal b = new BigDecimal(f);
+b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+
+// 方式二：
+// #.00 表示两位小数 #.0000四位小数 以此类推
+new java.text.DecimalFormat("#.00").format(f);
+
+// 方式三：
+// %.2f: %.表示 小数点前任意位数, 2 表示两位小数, f表示格式后的结果为浮点型
+String.format("%.2f", f);
+// 23不足15位就在前面补0
+String.format("%0" + 15 + "d", 23);  // 000000000000023
+
+// 方法四：
+NumberFormat nf = NumberFormat.getNumberInstance();
+nf.setMaximumFractionDigits(2);
+nf.format(f);
+
+// 方法五：
+Math.round(f * 100) * 0.01d;
