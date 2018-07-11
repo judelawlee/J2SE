@@ -1,0 +1,23 @@
+
+
+static中应该是纯方法的操作，不要new创建对象。
+
+反例：
+public static PackageDetailDO convertPackageDetailDTOToDO(PackageDetailDTO dto) {
+      if (dto == null) {
+          return null;
+      }
+
+      PackageDetailDO detailDO = new PackageDetailDO();
+      detailDO.setPackageCode(dto.getPackageCode());
+      detailDO.setPackageName(dto.getPackageName());
+      detailDO.setPackageDesc(dto.getPackageDesc());
+      detailDO.setOriginalPrice(dto.getOriginalPrice());
+      detailDO.setSalePrice(dto.getSalePrice());
+      detailDO.setLimitNumber(dto.getLimitNumber());
+      return detailDO;
+}
+
+说明：
+1.静态方法里面new的内存对象，每使用一次就会被丢弃，等待垃圾回收；
+2.静态方法每调用一次，里面new的内存对象都会被覆盖。
